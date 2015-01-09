@@ -13,21 +13,21 @@ public class Fenetre extends JFrame {
 	JButton bout2 = new JButton();
 	JButton bout3 = new JButton();
 
-
 	/** Constructeur.
 	 * 
 	 * @param titre : titre de la fenetre
 	 */
 	public Fenetre(String titre) {
 		super(titre);
-		//this.setIconImage(Toolkit.getDefaultToolkit().getImage("icon_game.gif"));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setBackground(Color.white);
 		this.setLocationRelativeTo(this);
 		this.setSize(840, 600);
+
 		// Initialisation de la barre de menu
 		barreMenu();
+
 		// definition du GridBagLayout
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -40,13 +40,13 @@ public class Fenetre extends JFrame {
 		gbc.gridheight = 1;
 		gbc.gridwidth = 1;
 		this.add(new JLabel(" "), gbc);
+
 		// Label Titre de la fenetre
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 2;
 		gbc.gridheight = 1;
 		label1.setPreferredSize(new Dimension(300, 100));
-		//label1.setBorder(BorderFactory.createRaisedBevelBorder());
 		label1.setHorizontalAlignment(0);
 		label1.setForeground(Color.red);
 		label1.setText(titre);
@@ -91,10 +91,16 @@ public class Fenetre extends JFrame {
 		// 	}
 		// });
 		this.add(bout2, gbc);
+		
+		// Ajoute une ligne vide
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 2;
+		this.add(new JLabel(" "), gbc);
 
 		// Button quitter
 		gbc.gridx = 1;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		bout3.setText("Quitter");
 		bout3.setSize(120, 10);
 		bout3.addActionListener(new ActionListener() {
@@ -106,7 +112,7 @@ public class Fenetre extends JFrame {
 
 		// Ajoute une ligne vide
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.gridwidth = 2;
 		this.add(new JLabel(" "), gbc);
 
@@ -114,7 +120,6 @@ public class Fenetre extends JFrame {
 		//pack();
 
 	}
-
 
 	/** Creation de la barre de menu.
 	 * 
@@ -130,8 +135,7 @@ public class Fenetre extends JFrame {
 		menuPrincipal.add(menuAide);
 		
 		// Menu Fichier
-		JMenuItem menuNouveau = new JMenuItem("Nouvelle partie");
-		//menuNouveau.setIcon(new ImageIcon("icon_game.gif"));
+		JMenuItem menuNouveau = new JMenuItem("Nouvelle simulation");
 		menuNouveau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				nouveau();
@@ -139,7 +143,7 @@ public class Fenetre extends JFrame {
 		});
 		menuFichier.add(menuNouveau);
 		menuFichier.addSeparator();
-		JMenuItem menuOuvrir = new JMenuItem("Charger partie");
+		JMenuItem menuOuvrir = new JMenuItem("Charger simulation");
 		menuOuvrir.setIcon(new ImageIcon("load.gif"));
 		menuOuvrir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -147,7 +151,7 @@ public class Fenetre extends JFrame {
 			}
 		});
 		menuFichier.add(menuOuvrir);
-		JMenuItem menuSauver = new JMenuItem("Sauver partie");
+		JMenuItem menuSauver = new JMenuItem("Sauver simulation");
 		menuSauver.setIcon(new ImageIcon("save.gif"));
 		menuSauver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -156,7 +160,7 @@ public class Fenetre extends JFrame {
 		});
 		menuFichier.add(menuSauver);
 		menuFichier.addSeparator();
-		JMenuItem menuQuitter = new JMenuItem("Quitter le jeu");
+		JMenuItem menuQuitter = new JMenuItem("Quitter");
 		menuQuitter.setIcon(new ImageIcon("window-close.gif"));
 		menuQuitter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -164,6 +168,7 @@ public class Fenetre extends JFrame {
 			}
 		});
 		menuFichier.add(menuQuitter);
+		
 		// Menu Edition
 		JMenuItem menuCouper = new JMenuItem(new DefaultEditorKit.CutAction());
 		menuCouper.setText("Couper");
@@ -199,36 +204,20 @@ public class Fenetre extends JFrame {
 
 	}
 
-	/** Permet de controler quand le programme est quitter.
-	 * 
-	 */
 	public void quitter() {
-		//JOptionPane.showConfirmDialog(this,"Voulez-vous quitter ?");
 		System.exit(0);
 	}
 
-
-	
-	/** Une nouvelle partie va commencer.
-	 * 
-	 */
 	public void nouveau() {
 		JOptionPane.showMessageDialog(this,"Nouveau\n");
 	}
 
-	/** Affiche les regles du jeu.
-	 * 
-	 */
 	public void regleJeu() {
 		JOptionPane.showMessageDialog(this,"Regles\n");
 	}
 
-	/** Affiche une boite d'information
-	 * 
-	 */
 	public void apropos() {
-		JOptionPane
-				.showMessageDialog(
+		JOptionPane.showMessageDialog(
 						this,
 						"Programme ecrit en Java\n\n"
 								+ "par \n\nCopyright "
@@ -236,16 +225,11 @@ public class Fenetre extends JFrame {
 
 	}
 
-	/** Permet de sauvegarder la position des elements sur le tableau de jeu.
-	 * 
-	 */
 	public void sauver() {
 		JOptionPane.showMessageDialog(this,"Sauver\n");
 	}
 
-	/** Permet de restaurer un jeu anterieur.
-	 * 
-	 */
+
 	public void charger() {
 		JOptionPane.showMessageDialog(this,"Charger\n");
 	}
