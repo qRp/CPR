@@ -59,7 +59,7 @@ public class Fenetre extends JFrame {
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
-		label2.setText("Gestion des molécules");
+		label2.setText("Gestion des molecules");
 		label2.setForeground(Color.blue);
 		label2.setPreferredSize(new Dimension(300, 100));
 		label2.setHorizontalAlignment(0);
@@ -82,7 +82,7 @@ public class Fenetre extends JFrame {
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
-		label3.setText("Gestion des expériences");
+		label3.setText("Gestion des experiences");
 		label3.setForeground(Color.green);
 		label3.setPreferredSize(new Dimension(300, 100));
 		label3.setHorizontalAlignment(0);
