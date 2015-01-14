@@ -8,6 +8,8 @@ import javax.swing.text.DefaultEditorKit;
 public class Fenetre extends JFrame {
 
 	JLabel label1 = new JLabel("");
+	JLabel label2 = new JLabel("");
+	JLabel label3 = new JLabel("");
 
 	JButton bout1 = new JButton();
 	JButton bout2 = new JButton();
@@ -20,7 +22,7 @@ public class Fenetre extends JFrame {
 	public Fenetre(String titre) {
 		super(titre);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setBackground(Color.white);
 		this.setLocationRelativeTo(this);
 		this.setSize(840, 600);
@@ -37,8 +39,8 @@ public class Fenetre extends JFrame {
 		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
+		gbc.gridheight = 1; //nb lignes
+		gbc.gridwidth = 1; //nb colonnes
 		this.add(new JLabel(" "), gbc);
 
 		// Label Titre de la fenetre
@@ -57,19 +59,22 @@ public class Fenetre extends JFrame {
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
-		this.add(new JLabel("Gestion des molecules", JLabel.LEFT), gbc);
+		label2.setText("Gestion des molécules");
+		label2.setForeground(Color.blue);
+		label2.setPreferredSize(new Dimension(300, 100));
+		label2.setHorizontalAlignment(0);
+		this.add(label2, gbc);
 
 		// Button 
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		bout1.setText("Molecules");
-		bout1.setSize(220, 110);
 		bout1.setEnabled(true);
-		// bout1.addActionListener(new ActionListener() {
-		// 	public void actionPerformed(ActionEvent e) {
-		// 		okJoueur1();
-		// 	}
-		// });
+		bout1.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) { 
+		 		System.out.println("blabla");
+		 	}
+		 });
 		this.add(bout1, gbc);
 
 		// Label Gestion experiences
@@ -77,7 +82,11 @@ public class Fenetre extends JFrame {
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
-		this.add(new JLabel("Gestion des experiences"), gbc);
+		label3.setText("Gestion des expériences");
+		label3.setForeground(Color.green);
+		label3.setPreferredSize(new Dimension(300, 100));
+		label3.setHorizontalAlignment(0);
+		this.add(label3, gbc);
 
 		// Button 
 		gbc.gridx = 1;
@@ -85,22 +94,23 @@ public class Fenetre extends JFrame {
 		bout2.setText("Experiences");
 		bout2.setSize(120, 10);
 		bout2.setEnabled(true);
-		// bout1.addActionListener(new ActionListener() {
-		// 	public void actionPerformed(ActionEvent e) {
-		// 		okJoueur1();
-		// 	}
-		// });
+		bout2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		 		Experiences exp = new Experiences("Simulation");
+		 		exp.setVisible(true);
+		 	}
+		 });
 		this.add(bout2, gbc);
 		
 		// Ajoute une ligne vide
 		gbc.gridx = 0;
 		gbc.gridy = 4;
-		gbc.gridwidth = 2;
 		this.add(new JLabel(" "), gbc);
 
 		// Button quitter
 		gbc.gridx = 1;
 		gbc.gridy = 5;
+		gbc.gridwidth = 2;
 		bout3.setText("Quitter");
 		bout3.setSize(120, 10);
 		bout3.addActionListener(new ActionListener() {
@@ -117,7 +127,7 @@ public class Fenetre extends JFrame {
 		this.add(new JLabel(" "), gbc);
 
 		// Reduire la fenetre a sa juste valeur pour contenir le tout
-		//pack();
+		pack();
 
 	}
 
