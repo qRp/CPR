@@ -1,11 +1,17 @@
 public class Agent {
     private String name;
-//    private TypeAgent type;
+    private Caracteristique type;
 
-    Agent(String nname){
+    public Agent(String nname){
 	name=nname;
-	
     }
+    public void setCaracteristique(Caracteristique ncarac){
+	type=ncarac;
+    }
+    public Caracteristique getCaracteristique(){
+	return type;
+    }
+
     public String getname(){
 	return name;
     }
