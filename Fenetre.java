@@ -96,7 +96,7 @@ public class Fenetre extends JFrame {
 		bout2.setEnabled(true);
 		bout2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		 		Experiences exp = new Experiences("Simulation");
+		 		ExpGraphique exp = new ExpGraphique("Simulation");
 		 		exp.setVisible(true);
 		 	}
 		 });
