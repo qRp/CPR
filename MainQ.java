@@ -12,6 +12,14 @@ public class MainQ {
 	CGlucose.ajouter(autreTemperature);
 	ag.setCaracteristique(CGlucose);
 	ag.getCaracteristique().afficher();
+	Experience exp= new Experience("exp");
+	Process proces=new Process("fixe");
+	exp.add_agent(ag);
+	exp.add_agent(agglo);
+	exp.add_process(proces);
+	exp.ecrire();
+	ag.ecrire();
+	agglo.ecrire();
 
     }
 }
