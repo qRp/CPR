@@ -1,3 +1,6 @@
+import java.io.*;
+import java.nio.*;
+import java.util.*;
 
 public class MainQ {
     public static void main(String[] args) throws Exception {
@@ -20,6 +23,9 @@ public class MainQ {
 	exp.ecrire();
 	ag.ecrire();
 	agglo.ecrire();
-
+	Parser parserAg = new Parser(System.getProperty("user.dir") + "/Agent.txt");
+	parserAg.processLineByLine();
+	Parser parserExp = new Parser(System.getProperty("user.dir")+"/Exp.txt");
+	parserExp.processLineByLine();
     }
 }
