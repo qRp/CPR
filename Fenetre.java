@@ -168,10 +168,7 @@ public class Fenetre extends JFrame {
 	public void experience(){
 		Simulation exp = new Simulation(this.getTitle());
  		exp.setVisible(true);
- 		
  		exp.nameExp();
-		//String nom = exp.nameExp();
-		//System.out.println(nom);
 	}
 
 	public void visu(){

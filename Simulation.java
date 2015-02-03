@@ -15,7 +15,6 @@ public class Simulation extends JFrame {
 	JButton b3 = new JButton();
 	
 	String name = "";
-	JLabel saveName = new JLabel("");
 	
 	int x, y, z ;
 	JFormattedTextField saisieX = new JFormattedTextField(new Integer(x));
@@ -158,18 +157,28 @@ public class Simulation extends JFrame {
 		//pack();
 		
 	}
+	
 	/*
 	 * A FAIRE :
 	 * NE PAS METTRE D'EXTENSION DANS LE NOM DE L'EXP
-	 * INTERDIRE LES CARACTERES EN DEHORS DE a-z A-Z 0-9 et '-'
+	 * 
 	 */
 	public void nameExp() {
-		// Boite de dialogue de saisie des noms des experiences
-		name = JOptionPane.showInputDialog("Saisir le nom de l'expérience");
-		saveName.setText(name); // pour recup le nom
-		//System.out.println(saveName);
-		//return name;
-
+        try { 
+           do {
+        	   name = JOptionPane.showInputDialog(null, "Saisir le nom de l'experience"); 
+        	   //Si on annule c'est la ligne suivante qui provoque la levee de NullPointerException 
+        	   if (name.equals(null)) {} // on ne fait rien
+        	   if (name.matches("([0-9a-zA-Z-])+") == false) {}
+        	   //System.out.println("Fin de saisie sans rien frapper au clavier");
+        	   } while (name.equals("") || name.matches("([0-9a-zA-Z-])+") == false);
+           } 
+        catch(NullPointerException npe) // cas <annuler> : uneEntree.equals(null) 
+        {
+        	System.out.println("Saisie annulee par le clic du bouton <Annuler>"); 
+        	this.dispose();
+            return;
+            } 
 	}
 	
 	public void agent(){
