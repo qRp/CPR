@@ -75,7 +75,7 @@ public class Fenetre extends JFrame {
 		bout1.setEnabled(true);
 		bout1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-		 		System.out.println("blabla");
+		 		molecule();
 		 	}
 		 });
 		this.add(bout1, gbc);
@@ -120,7 +120,7 @@ public class Fenetre extends JFrame {
 		b4.setEnabled(true);
 		b4.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) { 
-			System.out.println("visu");
+			visu();
 			}
 		});
 		this.add(b4, gbc);
@@ -160,15 +160,24 @@ public class Fenetre extends JFrame {
 		//pack();
 
 	}
+	public void molecule(){
+		AgentGraphique ag = new AgentGraphique(this.getTitle());
+		ag.setVisible(true);
+	}
 	
 	public void experience(){
 		Simulation exp = new Simulation(this.getTitle());
  		exp.setVisible(true);
- 
-		String nom = exp.nameExp();
-		System.out.println(nom);
+ 		
+ 		exp.nameExp();
+		//String nom = exp.nameExp();
+		//System.out.println(nom);
 	}
 
+	public void visu(){
+		System.out.println("visu");
+	}
+	
 	/** Creation de la barre de menu.
 	 * 
 	 */

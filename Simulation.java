@@ -163,12 +163,12 @@ public class Simulation extends JFrame {
 	 * NE PAS METTRE D'EXTENSION DANS LE NOM DE L'EXP
 	 * INTERDIRE LES CARACTERES EN DEHORS DE a-z A-Z 0-9 et '-'
 	 */
-	public String nameExp() {
+	public void nameExp() {
 		// Boite de dialogue de saisie des noms des experiences
 		name = JOptionPane.showInputDialog("Saisir le nom de l'expérience");
 		saveName.setText(name); // pour recup le nom
-		System.out.println(saveName);
-		return name;
+		//System.out.println(saveName);
+		//return name;
 
 	}
 	
