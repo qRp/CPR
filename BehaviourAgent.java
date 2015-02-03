@@ -1,13 +1,14 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 
-public class AgentGraphique extends JFrame {
+public class BehaviourAgent extends JFrame{
 	
 	JLabel label = new JLabel("");
 	
-	public AgentGraphique(String titre) {
+	public BehaviourAgent(String titre) {
 		super(titre);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setResizable(true);
@@ -34,7 +35,7 @@ public class AgentGraphique extends JFrame {
 		label.setPreferredSize(new Dimension(100, 100));
 		label.setHorizontalAlignment(0);
 		label.setForeground(Color.red);
-		label.setText("Agents");
+		label.setText("Comportements des Agents");
 		this.add(label, gbc);
 	}
 }

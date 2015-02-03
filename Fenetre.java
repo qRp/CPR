@@ -99,10 +99,7 @@ public class Fenetre extends JFrame {
 		bout2.setEnabled(true);
 		bout2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		 		Simulation exp = new Simulation("Simulation");
-		 		exp.setVisible(true);
-	 			exp.nameExp();
-	 			
+		 		experience();
 		 	}
 		 });
 		this.add(bout2, gbc);
@@ -129,7 +126,7 @@ public class Fenetre extends JFrame {
 		this.add(b4, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 4;
-		String tab1[] = {"tata.netlogo","tete.netlogo","titi.netlogo","toto.netlogo","tutu.netlogo","tyty.netlogo"};
+		String tab1[] = {"tata.nlogo","tete.nlogo","titi.nlogo","toto.nlogo","tutu.nlogo","tyty.nlogo"};
 		JList list1 = new JList(tab1);
 		JScrollPane scroll = new JScrollPane(list1);
 		scroll.createVerticalScrollBar();
@@ -162,6 +159,14 @@ public class Fenetre extends JFrame {
 		// Reduire la fenetre a sa juste valeur pour contenir le tout
 		//pack();
 
+	}
+	
+	public void experience(){
+		Simulation exp = new Simulation(this.getTitle());
+ 		exp.setVisible(true);
+ 
+		String nom = exp.nameExp();
+		System.out.println(nom);
 	}
 
 	/** Creation de la barre de menu.

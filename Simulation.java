@@ -106,8 +106,7 @@ public class Simulation extends JFrame {
 		b2.setEnabled(true);
 		b2.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-		 		AgentGraphique agg = new AgentGraphique("Agents");
-		 		agg.setVisible(true);
+		 		agent();
 		 	}
 		 });
 		this.add(b2, gbc);
@@ -137,7 +136,7 @@ public class Simulation extends JFrame {
 		 		JComboBox cb = (JComboBox)e.getSource();// chaque élement de la CB
 		        //String name = (String)cb.getSelectedItem();
 		        //updateLabel();
-		 		System.out.println("combo");
+		 		//System.out.println("combo");
 		 	}
 		 });
 		this.add(listLog,gbc);
@@ -147,7 +146,7 @@ public class Simulation extends JFrame {
 		gbc.gridy = 6;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
-		b3.setText("RUN");
+		b3.setText("Suivant");
 		b3.setEnabled(true);
 		b3.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
@@ -159,7 +158,11 @@ public class Simulation extends JFrame {
 		//pack();
 		
 	}
-
+	/*
+	 * A FAIRE :
+	 * NE PAS METTRE D'EXTENSION DANS LE NOM DE L'EXP
+	 * INTERDIRE LES CARACTERES EN DEHORS DE a-z A-Z 0-9 et '-'
+	 */
 	public String nameExp() {
 		// Boite de dialogue de saisie des noms des experiences
 		name = JOptionPane.showInputDialog("Saisir le nom de l'expérience");
@@ -169,7 +172,18 @@ public class Simulation extends JFrame {
 
 	}
 	
+	public void agent(){
+		AgentGraphique agg = new AgentGraphique(this.getTitle());
+ 		agg.setVisible(true);
+	}
+	
 	public void run(){
 		System.out.println("run");
+		/*
+		 * D'abord doit verifier si tous les champs sont remplis
+		 * Puis envoie vers la page Comportements Agents
+		 */
+		BehaviourAgent bea = new BehaviourAgent(this.getTitle());
+		bea.setVisible(true);
 	}
 }
