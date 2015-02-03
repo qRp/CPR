@@ -10,10 +10,13 @@ public class Fenetre extends JFrame {
 	JLabel label1 = new JLabel("");
 	JLabel label2 = new JLabel("");
 	JLabel label3 = new JLabel("");
+	JLabel label4 = new JLabel("");
 
 	JButton bout1 = new JButton();
 	JButton bout2 = new JButton();
 	JButton bout3 = new JButton();
+	JButton b4 = new JButton();
+	
 
 	/** Constructeur.
 	 * 
@@ -46,7 +49,7 @@ public class Fenetre extends JFrame {
 		// Label Titre de la fenetre
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		gbc.gridwidth = 2;
+		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
 		label1.setPreferredSize(new Dimension(300, 100));
 		label1.setHorizontalAlignment(0);
@@ -96,11 +99,40 @@ public class Fenetre extends JFrame {
 		bout2.setEnabled(true);
 		bout2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		 		ExpGraphique exp = new ExpGraphique("Simulation");
+		 		Simulation exp = new Simulation("Simulation");
 		 		exp.setVisible(true);
+		 		exp.nameExp();
 		 	}
 		 });
 		this.add(bout2, gbc);
+		
+		// Visualisation résultats
+		gbc.gridx = 2;
+		gbc.gridy = 2;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		label4.setText("Resultats");
+		label4.setForeground(Color.blue);
+		label4.setPreferredSize(new Dimension(100, 100));
+		label4.setHorizontalAlignment(0);
+		this.add(label4, gbc);
+		gbc.gridx = 2;
+		gbc.gridy = 3;
+		b4.setText("Visualiser");
+		b4.setEnabled(true);
+		b4.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) { 
+			System.out.println("visu");
+			}
+		});
+		this.add(b4, gbc);
+		gbc.gridx = 2;
+		gbc.gridy = 4;
+		String tab1[] = {"tata.netlogo","tete.netlogo","titi.netlogo","toto.netlogo","tutu.netlogo","tyty.netlogo"};
+		JList list1 = new JList(tab1);
+		JScrollPane scroll = new JScrollPane(list1);
+		scroll.createVerticalScrollBar();
+		this.add(scroll, gbc);		
 		
 		// Ajoute une ligne vide
 		gbc.gridx = 0;
@@ -108,7 +140,7 @@ public class Fenetre extends JFrame {
 		this.add(new JLabel(" "), gbc);
 
 		// Button quitter
-		gbc.gridx = 1;
+		gbc.gridx = 0;
 		gbc.gridy = 5;
 		gbc.gridwidth = 2;
 		bout3.setText("Quitter");
@@ -127,7 +159,7 @@ public class Fenetre extends JFrame {
 		this.add(new JLabel(" "), gbc);
 
 		// Reduire la fenetre a sa juste valeur pour contenir le tout
-		pack();
+		//pack();
 
 	}
 
