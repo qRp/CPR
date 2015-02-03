@@ -101,7 +101,8 @@ public class Fenetre extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 		 		Simulation exp = new Simulation("Simulation");
 		 		exp.setVisible(true);
-		 		exp.nameExp();
+	 			exp.nameExp();
+	 			
 		 	}
 		 });
 		this.add(bout2, gbc);

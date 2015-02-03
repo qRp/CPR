@@ -8,6 +8,7 @@ public class Main {
 		Fenetre cadrePrincipal = new Fenetre("Plateforme de Simulation");
 		cadrePrincipal.setVisible(true);
 		
+		
 	}
 	
 	public static void afficher(int x, int y, int z){

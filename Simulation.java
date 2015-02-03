@@ -14,7 +14,7 @@ public class Simulation extends JFrame {
 	JButton b2 = new JButton();
 	JButton b3 = new JButton();
 	
-	String name = null;
+	String name = "";
 	JLabel saveName = new JLabel("");
 	
 	int x, y, z ;
@@ -88,7 +88,8 @@ public class Simulation extends JFrame {
 		envZ.add(new JLabel("Z :"));
 		envZ.add(saisieZ);
 		this.add(envZ, gbc);
-
+		
+		
 		// Agents
 		gbc.gridx = 1;
 		gbc.gridy = 2;
@@ -134,7 +135,7 @@ public class Simulation extends JFrame {
 		listLog.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
 		 		JComboBox cb = (JComboBox)e.getSource();// chaque élement de la CB
-		        String name = (String)cb.getSelectedItem();
+		        //String name = (String)cb.getSelectedItem();
 		        //updateLabel();
 		 		System.out.println("combo");
 		 	}
@@ -150,7 +151,7 @@ public class Simulation extends JFrame {
 		b3.setEnabled(true);
 		b3.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-		 		System.out.println("blabla");
+		 		run();
 		 	}
 		 });
 		this.add(b3, gbc);
@@ -159,19 +160,16 @@ public class Simulation extends JFrame {
 		
 	}
 
-	public void nameExp() {
+	public String nameExp() {
 		// Boite de dialogue de saisie des noms des experiences
 		name = JOptionPane.showInputDialog("Saisir le nom de l'expérience");
 		saveName.setText(name); // pour recup le nom
+		System.out.println(saveName);
+		return name;
 
 	}
 	
-	public void coordonnees() {
-		x = new Integer(saisieX.getText()).intValue();
-		y = new Integer(saisieY.getText()).intValue();
-		z = new Integer(saisieZ.getText()).intValue();
-		if (env) {
-			Main.afficher(x, y, z);
-		}
+	public void run(){
+		System.out.println("run");
 	}
 }
