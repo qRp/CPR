@@ -4,7 +4,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Parser { 
@@ -37,15 +37,20 @@ public class Parser {
    <tt>this is the name = this is the value</tt>
   */
   protected void processLine(String aLine){
-    //use a second Scanner to parse the content of each line 
     Scanner scanner = new Scanner(aLine);
+    ArrayList<String> Lname = new ArrayList<String>();
     scanner.useDelimiter(":");
     if (scanner.hasNext()){
-      //assumes the line has a certain structure
       String name = scanner.next();
       String value = scanner.next();
-      log("Name is : " + quote(name.trim()) + ", and Value is : " + quote(value.trim()));
+      //log("Name is : " + quote(name.trim()) + ", and Value is : " + quote(value.trim()));
+      if(name.equals("name")){
+	  //	  System.out.println("i'm here");
+	  Lname.add(value);
+	  System.out.println(value);
+      }
     }
+    
     else {
       log("Empty or invalid line. Unable to process.");
     }
