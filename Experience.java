@@ -24,6 +24,16 @@ public class Experience{
     public ArrayList getlagent(){
 	return lagent;
     }
+    public void afficher(){
+	System.out.println("Affichage de l'experience");
+	System.out.println(name);
+	for(Agent agent : lagent){
+	    agent.afficher();
+	}
+	for(Process process : lprocess){
+	    process.afficher();
+	}
+    }
     public void ecrire(){
 	//on va chercher le chemin et le nom du fichier et on me tout ca dans un String
 	String adressedufichier = System.getProperty("user.dir") + "/Exp.txt";

@@ -8,57 +8,88 @@ import java.util.*;
 
 
 public class Parser { 
+    private final Path filePath;
+    private final static Charset ENCODING = StandardCharsets.UTF_8;  
+  
+
   /**
    Constructor.
    @param aFileName full name of an existing, readable file.
   */
-  public  Parser(String aFileName){
-    fFilePath = Paths.get(aFileName);
-  }
-  
-  
-  /** Template method that calls {@link #processLine(String)}.  */
-  public final void processLineByLine() throws IOException {
-    try (Scanner scanner =  new Scanner(fFilePath, ENCODING.name())){
-      while (scanner.hasNextLine()){
-        processLine(scanner.nextLine());
-      }      
+    public  Parser(String aFileName){
+      filePath = Paths.get(aFileName);
     }
-  }
-  
-  /** 
-   Overridable method for processing lines in different ways.
+    public Experience getExp(String name_to_find) throws IOException{
+	Experience exp = new Experience(name_to_find);
+	Scanner scanner = new Scanner(filePath, ENCODING.name());
+	String name_exp="";
+	String name="";
+	String value="";
+	while(scanner.hasNextLine()){
+	    name_exp=processLine(scanner.nextLine());
+	    if (name_exp.equals(name_to_find)){
+		System.out.println("here");
+		while(scanner.hasNextLine()&&!name.equals("name")){
+		    String line=scanner.nextLine();
+		    name=getname(line);
+		    value=getvalue(line);
+		    if(name.equals("process")){
+			Process process =new Process(value);
+			exp.add_process(process);
+		    }
+		    if(name.equals("agent")){
+			Agent agent =new Agent(value);
+			exp.add_agent(agent);
+		    }
+		}
+		return exp;
+	    }
+	}
+	return exp;
+    }
+
+    public String getname(String line){
+	Scanner scanner = new Scanner(line);
+	scanner.useDelimiter(":");
+	return scanner.next();
+    }
+    public String getvalue(String line){
+	Scanner scanner = new Scanner(line);
+	scanner.useDelimiter(":");
+	String temp=scanner.next();
+	return scanner.next();
+    }
+
+
+    public ArrayList<String> getListExp() throws IOException{
+	ArrayList<String> Lname = new ArrayList<String>();
+	Scanner scanner = new Scanner(filePath, ENCODING.name());
+	String name_exp="";
+	while(scanner.hasNextLine()){
+	    name_exp=processLine(scanner.nextLine());
+	    if(!name_exp.equals("")){
+		    Lname.add(name_exp);
+	    }
+	}
+	return Lname;
+    }
     
-   <P>This simple default implementation expects simple name-value pairs, separated by an 
-   '=' sign. Examples of valid input: 
-   <tt>height = 167cm</tt>
-   <tt>mass =  65kg</tt>
-   <tt>disposition =  "grumpy"</tt>
-   <tt>this is the name = this is the value</tt>
-  */
-  protected void processLine(String aLine){
-    Scanner scanner = new Scanner(aLine);
-    ArrayList<String> Lname = new ArrayList<String>();
-    scanner.useDelimiter(":");
-    if (scanner.hasNext()){
-      String name = scanner.next();
-      String value = scanner.next();
-      //log("Name is : " + quote(name.trim()) + ", and Value is : " + quote(value.trim()));
-      if(name.equals("name")){
-	  //	  System.out.println("i'm here");
-	  Lname.add(value);
-	  System.out.println(value);
-      }
+    protected String processLine(String aLine){
+	Scanner scanner = new Scanner(aLine);
+	scanner.useDelimiter(":");
+	if (scanner.hasNext()){
+	    String name = scanner.next();
+	    String value = scanner.next();
+	    //log("Name is : " + quote(name.trim()) + ", and Value is : " + quote(value.trim()));
+	    if(name.equals("name")){
+		//	  System.out.println("i'm here");
+		return value;
+	    }
+	}
+	return "";
     }
-    
-    else {
-      log("Empty or invalid line. Unable to process.");
-    }
-  }
   
   // PRIVATE 
-  private final Path fFilePath;
-  private final static Charset ENCODING = StandardCharsets.UTF_8;  
   
   private static void log(Object aObject){
     System.out.println(String.valueOf(aObject));

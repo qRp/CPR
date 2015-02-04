@@ -25,7 +25,13 @@ public class MainQ {
 	agglo.ecrire();
 	//Parser parserAg = new Parser(System.getProperty("user.dir") + "/Agent.txt");
 	//parserAg.processLineByLine();
+	ArrayList<String> liste_exp = new ArrayList<String>();
 	Parser parserExp = new Parser(System.getProperty("user.dir")+"/Exp.txt");
-	parserExp.processLineByLine();
+	liste_exp=parserExp.getListExp();
+	for(String name : liste_exp){
+	    System.out.println(name);
+	}
+	Experience retour = parserExp.getExp("test");
+	retour.afficher();
     }
 }
