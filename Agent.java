@@ -20,7 +20,14 @@ public class Agent {
     }
     public void afficher(){
 	System.out.println(name);
+	System.out.println(type.getname());
     }
+
+    public void setname(String nname){
+	name=nname;
+    }
+
+    
     public void ecrire(){
 	//on va chercher le chemin et le nom du fichier et on me tout ca dans un String
 	String adressedufichier = System.getProperty("user.dir") + "/Agent.txt";
@@ -32,6 +39,7 @@ public class Agent {
 		
 		//on marque dans le fichier ou plutot dans le BufferedWriter qui sert comme un tampon(stream)
 		output.write("name:"+getname()+"\n");
+		output.write("caracteristique:"+getCaracteristique().getname()+"\n");
 		//on peut utiliser plusieurs fois methode write
 		
 		output.flush();
@@ -39,7 +47,6 @@ public class Agent {
 		
 		output.close();
 		//et on le ferme
-		System.out.println("fichier créé");
 	    }
 	catch(IOException ioe){
 	    System.out.print("Erreur : ");

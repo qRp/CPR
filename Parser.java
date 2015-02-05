@@ -47,6 +47,31 @@ public class Parser {
 	}
 	return exp;
     }
+    public Agent getAgent(String name_to_find) throws IOException{
+	Agent agent = new Agent(name_to_find);
+	Scanner scanner = new Scanner(filePath, ENCODING.name());
+	String name_agent="";
+	String name="";
+	String value="";
+	while(scanner.hasNextLine()){
+	    name_agent=processLine(scanner.nextLine());
+	    if (name_agent.equals(name_to_find)){
+		while(scanner.hasNextLine()&&!name.equals("name")){
+		    String line=scanner.nextLine();
+		    name=getname(line);
+		    value=getvalue(line);
+		    if(name.equals("caracteristique")){
+			Caracteristique caracteristique =new Caracteristique(value);
+			System.out.println(caracteristique.getname());
+			agent.setCaracteristique(caracteristique);
+			System.out.println(agent.getCaracteristique().getname());			
+		    }
+		}
+		return agent;
+	    }
+	}
+	return agent;
+    }
 
     public String getname(String line){
 	Scanner scanner = new Scanner(line);
