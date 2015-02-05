@@ -23,7 +23,11 @@ public class MainQ {
 	exp.add_process(proces);
 	ag.ecrire();
 	Parser parserAg = new Parser(System.getProperty("user.dir") + "/Agent.txt");
-	Agent test=parserAg.getAgent("tatait");
-	test.afficher();
+	//Agent test=parserAg.getAgent("tatait");
+	//test.afficher();
+	
+	Environnement env = new Environnement(30,30,50,"testEnvironnement");
+	SaveNetlogo sn = new SaveNetlogo("testFile", proces, ag, env);
+	sn.writeFile();
     }
 }

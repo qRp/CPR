@@ -1,9 +1,11 @@
 import java.util.*;
 import java.io.*;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
+import java.io.File;
 
 public class SaveNetlogo{
     private String name;
@@ -35,7 +37,13 @@ public class SaveNetlogo{
     public void writeFile(){ 
         ArrayList<String> functionL = new ArrayList<String>();
 		try{
+		    
 			BufferedWriter buff=new BufferedWriter(new FileWriter(name+".nlogo"));
+			/*
+			File tmp = File.createTempFile("test",".tmp");
+			String absolutePath = tmp.getAbsolutePath();
+			System.out.println("File " + absolutePath);
+			*/
 			//buff.write("code:RADE");
 			//buff.newLine();
 			
@@ -75,12 +83,12 @@ public class SaveNetlogo{
 		    }
             */
             // create plot
-            
-            
+            buff.newLine();
+            endFile(buff);
 			buff.flush(); 
 			buff.close();
 		}
-		catch(Exception e){System.out.println("Emergeance");} // toutes les exceptions
+		catch(Exception e){System.out.println("Emergeance 1");} // toutes les exceptions
 	}
 
     private void initFunctionButton(ArrayList<String> functionButton){
@@ -130,7 +138,7 @@ public class SaveNetlogo{
         	buff.write("1");
 			buff.newLine();
         }
-        catch(Exception e){System.out.println("Emergeance");} // toutes les exceptions
+        catch(Exception e){System.out.println("Emergeance 2");} // toutes les exceptions
     }
     
     public void createGraphicWindow(BufferedWriter buff, Environnement env){
@@ -190,7 +198,22 @@ public class SaveNetlogo{
         	buff.write("30.0");
         	buff.newLine();
     	}
-    	catch(Exception e){System.out.println("Emergeance");} // toutes les exceptions
+    	catch(Exception e){System.out.println("Emergeance 3");} // toutes les exceptions
     }
+    
+    public void endFile(BufferedWriter buff){
+        try (FileReader fileIn = new FileReader("endFileNetlogo.nlogo")){
+            BufferedReader buffR = new BufferedReader(fileIn);
+            String info;
+            while ((info = buffR.readLine()) != null){
+                buff.write(info);
+                buff.newLine();
+            }
+            fileIn.close();
+        }
+        catch(Exception e){System.out.println("Emergeance 4");} // toutes les exceptions
+        
+    }
+    
 
 }
