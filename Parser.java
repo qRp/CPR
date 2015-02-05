@@ -59,7 +59,18 @@ public class Parser {
 	String temp=scanner.next();
 	return scanner.next();
     }
-
+    public ArrayList<String> getListAgent() throws IOException{
+	ArrayList<String> Lname = new ArrayList<String>();
+	Scanner scanner = new Scanner(filePath, ENCODING.name());
+	String name_agent="";
+	while(scanner.hasNextLine()){
+	    name_agent=processLine(scanner.nextLine());
+	    if(!name_agent.equals("")){
+		Lname.add(name_agent);
+	    }
+	}
+	return Lname;
+    }
 
     public ArrayList<String> getListExp() throws IOException{
 	ArrayList<String> Lname = new ArrayList<String>();

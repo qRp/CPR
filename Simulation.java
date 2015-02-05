@@ -132,7 +132,7 @@ public class Simulation extends JFrame {
 		JComboBox listLog = new JComboBox(tabLog);
 		listLog.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-		 		JComboBox cb = (JComboBox)e.getSource();// chaque Žlement de la CB
+		 		JComboBox cb = (JComboBox)e.getSource();// chaque element de la CB
 		        //String name = (String)cb.getSelectedItem();
 		        //updateLabel();
 		 		//System.out.println("combo");

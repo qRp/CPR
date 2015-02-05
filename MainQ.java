@@ -23,8 +23,18 @@ public class MainQ {
 	exp.ecrire();
 	ag.ecrire();
 	agglo.ecrire();
-	//Parser parserAg = new Parser(System.getProperty("user.dir") + "/Agent.txt");
-	//parserAg.processLineByLine();
+	Environnement env = new Environnement();
+	Environnement env1 = new Environnement(1,2,3,"Nous irons au bois");
+	Environnement env2 = new Environnement(4,5,6);
+	env.afficher();
+	env1.afficher();
+	env2.afficher();
+	System.out.println(env1.getx());
+	System.out.println(env1.gety());
+	System.out.println(env1.getz());
+	System.out.println(env1.getdescription());
+	/*Parser parserAg = new Parser(System.getProperty("user.dir") + "/Agent.txt");
+	parserAg.processLineByLine();
 	ArrayList<String> liste_exp = new ArrayList<String>();
 	Parser parserExp = new Parser(System.getProperty("user.dir")+"/Exp.txt");
 	liste_exp=parserExp.getListExp();
@@ -33,5 +43,11 @@ public class MainQ {
 	}
 	Experience retour = parserExp.getExp("test");
 	retour.afficher();
+	ArrayList<String> liste_agent = new ArrayList<String>();
+	Parser parserAgent = new Parser(System.getProperty("user.dir")+"/Agent.txt");
+	liste_agent=parserAgent.getListAgent();
+	for(String name_agent : liste_agent){
+	    System.out.println(name_agent);
+	    }*/
     }
 }

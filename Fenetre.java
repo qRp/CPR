@@ -104,7 +104,7 @@ public class Fenetre extends JFrame {
 		 });
 		this.add(bout2, gbc);
 		
-		// Visualisation résultats
+		// Visualisation resultats
 		gbc.gridx = 2;
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;

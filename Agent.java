@@ -26,12 +26,6 @@ public class Agent {
 	String adressedufichier = System.getProperty("user.dir") + "/Agent.txt";
 	try
 	    {
-		/**
-		 * BufferedWriter a besoin d un FileWriter, 
-		 * les 2 vont ensemble, on donne comme argument le nom du fichier
-		 * true signifie qu on ajoute dans le fichier (append), on ne marque pas par dessus 
-		 
-		 */
 		FileWriter fw = new FileWriter(adressedufichier, true);
 		// le BufferedWriter output auquel on donne comme argument le FileWriter fw cree juste au dessus
 		BufferedWriter output = new BufferedWriter(fw);
