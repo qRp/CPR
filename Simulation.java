@@ -33,6 +33,7 @@ public class Simulation extends JFrame {
 		this.setBackground(Color.white);
 		this.setLocationRelativeTo(this);
 		this.setSize(840, 600);
+		
 	
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -51,7 +52,7 @@ public class Simulation extends JFrame {
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
-		label.setPreferredSize(new Dimension(100, 100));
+		//label.setPreferredSize(new Dimension(100, 100));
 		label.setHorizontalAlignment(0);
 		label.setForeground(Color.red);
 		label.setText("Simulation");
@@ -158,26 +159,22 @@ public class Simulation extends JFrame {
 		
 	}
 	
-	/*
-	 * A FAIRE :
-	 * NE PAS METTRE D'EXTENSION DANS LE NOM DE L'EXP
-	 * 
-	 */
-	public void nameExp() {
+	public String nameExp() {
         try { 
            do {
-        	   name = JOptionPane.showInputDialog(null, "Saisir le nom de l'experience"); 
+        	   name = JOptionPane.showInputDialog(null, "Saisir le nom de l'experience\nCaracteres autorises alphanumeriques"); 
         	   //Si on annule c'est la ligne suivante qui provoque la levee de NullPointerException 
         	   if (name.equals(null)) {} // on ne fait rien
         	   if (name.matches("([0-9a-zA-Z-])+") == false) {}
         	   //System.out.println("Fin de saisie sans rien frapper au clavier");
         	   } while (name.equals("") || name.matches("([0-9a-zA-Z-])+") == false);
+           return name;
            } 
         catch(NullPointerException npe) // cas <annuler> : uneEntree.equals(null) 
         {
         	System.out.println("Saisie annulee par le clic du bouton <Annuler>"); 
         	this.dispose();
-            return;
+            return "";
             } 
 	}
 	

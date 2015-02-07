@@ -31,7 +31,7 @@ public class AgentGraphique extends JFrame {
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
-		label.setPreferredSize(new Dimension(100, 100));
+		//label.setPreferredSize(new Dimension(100, 100));
 		label.setHorizontalAlignment(0);
 		label.setForeground(Color.red);
 		label.setText("Agents");

@@ -7,6 +7,7 @@ public class Main {
 
 		Fenetre cadrePrincipal = new Fenetre("Plateforme de Simulation");
 		cadrePrincipal.setVisible(true);
+		
 	}
 	
 }
