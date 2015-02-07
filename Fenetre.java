@@ -2,12 +2,17 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultEditorKit;
+
+import java.util.*;
 
 
 public class Fenetre extends JFrame {
 
 	JLabel label1 = new JLabel("");
+	JPanel pan = new JPanel();
+	
 	JLabel label2 = new JLabel("");
 	JLabel label3 = new JLabel("");
 	JLabel label4 = new JLabel("");
@@ -49,14 +54,33 @@ public class Fenetre extends JFrame {
 		// Label Titre de la fenetre
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		gbc.gridwidth = 3;
+		gbc.gridwidth = 2;
 		gbc.gridheight = 1;
-		label1.setPreferredSize(new Dimension(300, 100));
 		label1.setHorizontalAlignment(0);
-		label1.setForeground(Color.red);
+		label1.setForeground(Color.orange);
 		label1.setText(titre);
-		this.add(label1, gbc);
+		label1.setFont(new Font("Courier",Font.BOLD,30));
+		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		pan.setBackground(Color.gray);
+		label1.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		pan.add(label1, BorderLayout.CENTER);
+		this.add(pan, gbc);
 
+		// Icone titre
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		ImageIcon icone = new ImageIcon("ag.jpg");
+		JLabel img = new JLabel("", icone, JLabel.LEFT);
+		img.setIconTextGap(1);
+		//img.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		//img.setHorizontalTextPosition(JLabel.LEFT);
+		//img.setVerticalTextPosition(JLabel.RIGHT);
+		//pan.add(img);
+		//this.add(pan, gbc);
+		this.add(img);
+		
 		// Label Gestion molecules
 		gbc.gridx = 0;
 		gbc.gridy = 2;
@@ -86,7 +110,7 @@ public class Fenetre extends JFrame {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		label3.setText("Gestion des experiences");
-		label3.setForeground(Color.green);
+		label3.setForeground(Color.blue);
 		label3.setPreferredSize(new Dimension(300, 100));
 		label3.setHorizontalAlignment(0);
 		this.add(label3, gbc);
@@ -110,7 +134,7 @@ public class Fenetre extends JFrame {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		label4.setText("Resultats");
-		label4.setForeground(Color.blue);
+		label4.setForeground(Color.green);
 		label4.setPreferredSize(new Dimension(100, 100));
 		label4.setHorizontalAlignment(0);
 		this.add(label4, gbc);
@@ -168,9 +192,16 @@ public class Fenetre extends JFrame {
 	public void experience(){
 		Simulation exp = new Simulation(this.getTitle());
  		exp.setVisible(true);
- 		exp.nameExp();
+ 		String name = exp.nameExp();
+ 		
+ 		//Parser parserExp = new Parser(System.getProperty("user.dir")+"/Exp.txt");
+ 		//ArrayList<String> Lname = new ArrayList<String>();
+ 		//Lname = parserExp.processLineByLine();
+ 		
+ 		
 	}
 
+	
 	public void visu(){
 		System.out.println("visu");
 	}
@@ -274,8 +305,8 @@ public class Fenetre extends JFrame {
 		JOptionPane.showMessageDialog(
 						this,
 						"Programme ecrit en Java\n\n"
-								+ "par \n\nCopyright "
-								+ "Master Bioinformatique 2014-2015");
+								+ "par BESSY Arien\nDROUINEAU Emilie\nMERSCH Marjorie\nRICHE-PIOTAIX Quentin\n\nCopyright "
+								+ "Master 2 Bioinformatique 2014-2015");
 
 	}
 
