@@ -11,7 +11,9 @@ import java.util.*;
 public class Fenetre extends JFrame {
 
 	JLabel label1 = new JLabel("");
+	JLabel lab = new JLabel("");
 	JPanel pan = new JPanel();
+	//JPanel pan2 = new JPanel();
 	
 	JLabel label2 = new JLabel("");
 	JLabel label3 = new JLabel("");
@@ -42,44 +44,31 @@ public class Fenetre extends JFrame {
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		this.setLayout(gbl);
-
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.CENTER;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridheight = 1; //nb lignes
-		gbc.gridwidth = 1; //nb colonnes
-		this.add(new JLabel(" "), gbc);
 
 		// Label Titre de la fenetre
 		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.gridwidth = 2;
-		gbc.gridheight = 1;
-		label1.setHorizontalAlignment(0);
-		label1.setForeground(Color.orange);
-		label1.setText(titre);
-		label1.setFont(new Font("Courier",Font.BOLD,30));
+		gbc.gridy = 0;
+		gbc.gridwidth = 3;
+		gbc.gridheight = 2;
 		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-		pan.setBackground(Color.gray);
-		label1.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		pan.add(label1, BorderLayout.CENTER);
-		this.add(pan, gbc);
-
-		// Icone titre
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
+		pan.setBackground(Color.GRAY);
+		label1.setForeground(Color.orange);
+		label1.setText(titre+"\n\n");
+		label1.setFont(new Font("Courier", Font.BOLD, 30));
+		label1.setBorder(BorderFactory.createEmptyBorder(0,70,70,0));
+		lab.setText("Simulation de systemes multi-agents");
+		lab.setFont(new Font("TimesRoman", Font.ITALIC, 11));
+		lab.setBorder(BorderFactory.createEmptyBorder(70,0,0,50));
 		ImageIcon icone = new ImageIcon("ag.jpg");
 		JLabel img = new JLabel("", icone, JLabel.LEFT);
-		img.setIconTextGap(1);
-		//img.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		//img.setHorizontalTextPosition(JLabel.LEFT);
-		//img.setVerticalTextPosition(JLabel.RIGHT);
-		//pan.add(img);
-		//this.add(pan, gbc);
-		this.add(img);
+		img.setIconTextGap(10);
+		img.setBorder(BorderFactory.createEmptyBorder(0,50,0,50));
+		pan.add(img);
+		pan.add(label1);
+		pan.add(lab);
+		this.add(pan, gbc);
 		
 		// Label Gestion molecules
 		gbc.gridx = 0;
@@ -87,7 +76,8 @@ public class Fenetre extends JFrame {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		label2.setText("Gestion des molecules");
-		label2.setForeground(Color.blue);
+		label2.setFont(new Font("Capitals", Font.PLAIN, 20));
+		label2.setForeground(new Color(136, 66, 29));
 		label2.setPreferredSize(new Dimension(300, 100));
 		label2.setHorizontalAlignment(0);
 		this.add(label2, gbc);
@@ -110,7 +100,8 @@ public class Fenetre extends JFrame {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		label3.setText("Gestion des experiences");
-		label3.setForeground(Color.blue);
+		label3.setFont(new Font("Capitals", Font.PLAIN, 20));
+		label3.setForeground(new Color(136, 66, 29));
 		label3.setPreferredSize(new Dimension(300, 100));
 		label3.setHorizontalAlignment(0);
 		this.add(label3, gbc);
@@ -128,14 +119,16 @@ public class Fenetre extends JFrame {
 		 });
 		this.add(bout2, gbc);
 		
+		
+		//creer une ligne entre les colones 1 et 2
+		
 		// Visualisation resultats
 		gbc.gridx = 2;
 		gbc.gridy = 2;
-		gbc.gridwidth = 1;
-		gbc.gridheight = 1;
 		label4.setText("Resultats");
-		label4.setForeground(Color.green);
-		label4.setPreferredSize(new Dimension(100, 100));
+		label4.setFont(new Font("Capitals", Font.PLAIN, 20));
+		label4.setForeground(new Color(231, 62, 1));
+		label4.setPreferredSize(new Dimension(300, 150));
 		label4.setHorizontalAlignment(0);
 		this.add(label4, gbc);
 		gbc.gridx = 2;
@@ -150,6 +143,7 @@ public class Fenetre extends JFrame {
 		this.add(b4, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 4;
+		gbc.gridheight = 2;
 		String tab1[] = {"tata.nlogo","tete.nlogo","titi.nlogo","toto.nlogo","tutu.nlogo","tyty.nlogo"};
 		JList list1 = new JList(tab1);
 		JScrollPane scroll = new JScrollPane(list1);
@@ -159,12 +153,14 @@ public class Fenetre extends JFrame {
 		// Ajoute une ligne vide
 		gbc.gridx = 0;
 		gbc.gridy = 4;
+		gbc.gridheight = 2;
 		this.add(new JLabel(" "), gbc);
 
 		// Button quitter
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.gridwidth = 2;
+		gbc.gridheight = 1;
 		bout3.setText("Quitter");
 		bout3.setSize(120, 10);
 		bout3.addActionListener(new ActionListener() {
@@ -176,12 +172,12 @@ public class Fenetre extends JFrame {
 
 		// Ajoute une ligne vide
 		gbc.gridx = 0;
-		gbc.gridy = 6;
-		gbc.gridwidth = 2;
+		gbc.gridy = 7;
+		gbc.gridwidth = 3;
 		this.add(new JLabel(" "), gbc);
 
 		// Reduire la fenetre a sa juste valeur pour contenir le tout
-		//pack();
+		pack();
 
 	}
 	public void molecule(){
