@@ -13,7 +13,7 @@ public class Fenetre extends JFrame {
 	JLabel label1 = new JLabel("");
 	JLabel lab = new JLabel("");
 	JPanel pan = new JPanel();
-	//JPanel pan2 = new JPanel();
+	JPanel pan2 = new JPanel();
 	
 	JLabel label2 = new JLabel("");
 	JLabel label3 = new JLabel("");
@@ -120,8 +120,6 @@ public class Fenetre extends JFrame {
 		this.add(bout2, gbc);
 		
 		
-		//creer une ligne entre les colones 1 et 2
-		
 		// Visualisation resultats
 		gbc.gridx = 2;
 		gbc.gridy = 2;
@@ -130,11 +128,13 @@ public class Fenetre extends JFrame {
 		label4.setForeground(new Color(231, 62, 1));
 		label4.setPreferredSize(new Dimension(300, 150));
 		label4.setHorizontalAlignment(0);
+		label4.setBorder(BorderFactory.createMatteBorder(0,5,0,0,new Color(231, 62, 1)));
 		this.add(label4, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 3;
 		b4.setText("Visualiser");
 		b4.setEnabled(true);
+		//b4.setBorder(BorderFactory.createMatteBorder(0,5,0,0,new Color(231, 62, 1)));
 		b4.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) { 
 			visu();
@@ -148,6 +148,7 @@ public class Fenetre extends JFrame {
 		JList list1 = new JList(tab1);
 		JScrollPane scroll = new JScrollPane(list1);
 		scroll.createVerticalScrollBar();
+		//scroll.setBorder(BorderFactory.createMatteBorder(0,5,0,0,new Color(231, 62, 1)));
 		this.add(scroll, gbc);		
 		
 		// Ajoute une ligne vide
