@@ -14,7 +14,7 @@ public class SaveNetlogo{
     private ArrayList<BioAgent> lagent = new ArrayList<BioAgent>();
     */
     private Process lprocess;
-    private Agent lagent;
+    private Experience exp;
     private ArrayList<String> fonctionButton = new ArrayList<String>();
     private int Xlen = 140;
     private int Ylen = 40;
@@ -27,14 +27,16 @@ public class SaveNetlogo{
 	lagent = bioagent;
     }
 */
-    public SaveNetlogo(String nameFile, Process processes, Agent bioagent, Environnement env2D){
+    public SaveNetlogo(String nameFile, Process processes, Experience expe, Environnement env2D){
 	    name = nameFile;
 	    lprocess = processes;
-	    lagent = bioagent;
+	    exp = expe;
 	    env = env2D;
     }    
     
-    public void writeFile(){ 
+    public void writeFile(){
+        int Xpos = 0;
+        int Ypos = 0; 
         ArrayList<String> functionL = new ArrayList<String>();
 		try{
 		    
@@ -66,15 +68,43 @@ public class SaveNetlogo{
 			    buff.newLine();
 			    String functionName = functionL.get(i);
 			    //calculer le bonne valeur des cordonnees des points
-			    int Ypos = i*i+i*10;
-			    int Xpos = 0;
+			    Ypos = 0;
+			    Xpos += i*Xlen;
 			    createButton(buff, functionName, Xpos, Ypos);
 			}
+						
+			//create sliders
+			ArrayList<Agent> lagent = exp.getlagent();
+			Xpos = 0;
+			for (int i=0 ; i<lagent.size() ; i++){
+			    Agent agentCara = lagent.get(i);
+			    System.out.println("agent " + agentCara);
+			    String agentName = agentCara.getname();
+			    Caracteristique cara = agentCara.getCaracteristique();
+			    ArrayList<Descripteur> lDescripteur = new ArrayList<Descripteur>();
+			    lDescripteur = cara.getDescripteur();
+			    System.out.println("des len " + lDescripteur.size());
+                for (int j=0 ; j<lDescripteur.size() ; j++){
+                    Descripteur des = lDescripteur.get(j);
+                    String desName = des.getname();
+                    String varName = agentName + "_" + desName;
+                    if (des.gettype()=="float"){
+                        float f = des.getvalue();
+                        System.out.println("des Value " + f);
+                        Ypos += Ylen;
+                        
+                        createSlider(buff, varName, Xpos, Ypos);
+                    } 
+                    if (des.gettype()=="boolean"){
+                        createSwitch(buff, varName, Xpos, Ypos);
+                    }
+                }
+			}
+			
 			/*
 			//reccup tous les descripteurs des agents et du type d'agent
 			// create slider, comment or switch
 			//if values: slider (default values if no information)
-			//if value: comment
 			//if boolean: switch
 			for(BioAgent agent : lagent){
 				output.write("agent:"+agent.getname()+"\n");
@@ -139,6 +169,82 @@ public class SaveNetlogo{
 			buff.newLine();
         }
         catch(Exception e){System.out.println("Emergeance 2");} // toutes les exceptions
+    }
+    
+    //create button 
+    public void createSwitch(BufferedWriter buff, String nameButton, int Xpos, int Ypos){
+        String x = Integer.toString(Xpos);
+        String y = Integer.toString(Ypos);
+        String xl = Integer.toString(Xlen);
+        String yl = Integer.toString(Ylen);
+        try{ 
+            buff.newLine();       
+            buff.write("SWITCH");
+			buff.newLine();
+			buff.write(x);
+			buff.newLine();
+        	buff.write(y);
+			buff.newLine();
+        	buff.write(xl);
+			buff.newLine();
+        	buff.write(yl);
+			buff.newLine();
+        	buff.write(nameButton);
+			buff.newLine();
+        	buff.write(nameButton);
+			buff.newLine();
+        	buff.write("1");
+			buff.newLine();
+        	buff.write("1");
+        	buff.newLine();
+        	buff.write("-1000");
+        	buff.newLine();
+        }
+        catch(Exception e){System.out.println("Emergeance 6");} // toutes les exceptions
+    }
+    
+    //create button 
+    public void createSlider(BufferedWriter buff, String nameButton, int Xpos, int Ypos){
+        String x = Integer.toString(Xpos);
+        String y = Integer.toString(Ypos);
+        String xl = Integer.toString(Xlen);
+        String yl = Integer.toString(Ylen);
+        String min1 = "1";
+        String max1 = "10";
+        String value1 = "5";
+        String pas1 = "1";
+        try{   
+            buff.newLine();     
+            buff.write("SLIDER");
+			buff.newLine();
+			buff.write(x);
+			buff.newLine();
+        	buff.write(y);
+			buff.newLine();
+        	buff.write(xl);
+			buff.newLine();
+        	buff.write(yl);
+			buff.newLine();
+        	buff.write(nameButton);
+			buff.newLine();
+        	buff.write(nameButton);
+			buff.newLine();
+        	buff.write(min1);
+			buff.newLine();
+        	buff.write(max1);
+        	buff.newLine();
+        	buff.write(value1);
+        	buff.newLine();
+        	buff.write(pas1);
+        	buff.newLine();
+        	buff.write("1");
+			buff.newLine();
+        	buff.write("NIL");
+        	buff.newLine();
+        	buff.write("HORIZONTAL");
+        	buff.newLine();
+        }
+        catch(Exception e){System.out.println("Emergeance 5");} // toutes les exceptions
     }
     
     public void createGraphicWindow(BufferedWriter buff, Environnement env){

@@ -26,8 +26,8 @@ public class MainQ {
 	//Agent test=parserAg.getAgent("tatait");
 	//test.afficher();
 	
-	Environnement env = new Environnement(30,30,50,"testEnvironnement");
-	SaveNetlogo sn = new SaveNetlogo("testFile", proces, ag, env);
+	Environnement env = new Environnement(20,20,20,"testEnvironnement");
+	SaveNetlogo sn = new SaveNetlogo("testFile", proces, exp, env);
 	sn.writeFile();
     }
 }
