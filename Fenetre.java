@@ -47,15 +47,15 @@ public class Fenetre extends JFrame {
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.CENTER;
 
-		// Label Titre de la fenetre
+		// Titre
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.gridwidth = 3;
-		gbc.gridheight = 2;
+		gbc.gridwidth = 3; // nb colonne
+		gbc.gridheight = 2; //nb ligne
 		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		pan.setBackground(Color.GRAY);
 		label1.setForeground(Color.orange);
-		label1.setText(titre+"\n\n");
+		label1.setText(titre);
 		label1.setFont(new Font("Courier", Font.BOLD, 30));
 		label1.setBorder(BorderFactory.createEmptyBorder(0,70,70,0));
 		lab.setText("Simulation de systemes multi-agents");

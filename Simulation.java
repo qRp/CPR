@@ -6,10 +6,13 @@ import javax.swing.*;
 
 public class Simulation extends JFrame {
 	JLabel label = new JLabel("");
+	JLabel lab = new JLabel("");
 	JLabel lab1 = new JLabel("");
 	JLabel lab2 = new JLabel("");
 	JLabel lab3 = new JLabel("");
 
+	JPanel pan = new JPanel();
+	
 	JButton b1 = new JButton();
 	JButton b2 = new JButton();
 	JButton b3 = new JButton();
@@ -41,22 +44,29 @@ public class Simulation extends JFrame {
 
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.CENTER;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridheight = 1; //nb lignes
-		gbc.gridwidth = 1; //nb colonnes
-		this.add(new JLabel(" "), gbc);
-		
+				
 		// Titre
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+		gbc.gridy = 0;
 		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		//label.setPreferredSize(new Dimension(100, 100));
-		label.setHorizontalAlignment(0);
-		label.setForeground(Color.red);
-		label.setText("Simulation");
-		this.add(label, gbc);
+		gbc.gridheight = 2;
+		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		pan.setBackground(Color.GRAY);
+		label.setForeground(Color.orange);
+		label.setText(titre);
+		label.setFont(new Font("Courier", Font.BOLD, 30));
+		label.setBorder(BorderFactory.createEmptyBorder(0,70,70,0));
+		lab.setText("Simulation de systemes multi-agents");
+		lab.setFont(new Font("TimesRoman", Font.ITALIC, 11));
+		lab.setBorder(BorderFactory.createEmptyBorder(70,0,0,50));
+		ImageIcon icone = new ImageIcon("ag.jpg");
+		JLabel img = new JLabel("", icone, JLabel.LEFT);
+		img.setIconTextGap(10);
+		img.setBorder(BorderFactory.createEmptyBorder(0,50,0,50));
+		pan.add(img);
+		pan.add(label);
+		pan.add(lab);
+		this.add(pan, gbc);
 		
 		
 		// Environnement
@@ -65,8 +75,10 @@ public class Simulation extends JFrame {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		lab1.setText("Environnement");
-		lab1.setForeground(Color.blue);
-		lab1.setPreferredSize(new Dimension(100, 100));
+		lab1.setFont(new Font("Capitals", Font.PLAIN, 20));
+		lab1.setForeground(new Color(136, 66, 29));
+		
+		lab1.setPreferredSize(new Dimension(300, 100));
 		lab1.setHorizontalAlignment(0);
 		this.add(lab1, gbc);
 		// Champs de saisie pour x, y, z
@@ -93,11 +105,10 @@ public class Simulation extends JFrame {
 		// Agents
 		gbc.gridx = 1;
 		gbc.gridy = 2;
-		gbc.gridwidth = 1;
-		gbc.gridheight = 1;
 		lab2.setText("Agents");
-		lab2.setForeground(Color.blue);
-		lab2.setPreferredSize(new Dimension(100, 100));
+		lab2.setFont(new Font("Capitals", Font.PLAIN, 20));
+		lab2.setForeground(new Color(136, 66, 29));
+		lab2.setPreferredSize(new Dimension(300, 100));
 		lab2.setHorizontalAlignment(0);
 		this.add(lab2, gbc);
 		gbc.gridx = 1;
@@ -123,8 +134,9 @@ public class Simulation extends JFrame {
 		gbc.gridx = 2;
 		gbc.gridy = 2;
 		lab3.setText("Logiciels");
-		lab3.setForeground(Color.pink);
-		lab3.setPreferredSize(new Dimension(100, 100));
+		lab3.setFont(new Font("Capitals", Font.PLAIN, 20));
+		lab3.setForeground(new Color(136, 66, 29));
+		lab3.setPreferredSize(new Dimension(300, 100));
 		lab3.setHorizontalAlignment(0);
 		this.add(lab3, gbc);
 		gbc.gridx = 2;
@@ -140,12 +152,16 @@ public class Simulation extends JFrame {
 		 	}
 		 });
 		this.add(listLog,gbc);
-
-		// Run
+		
+		// Ajoute une ligne vide
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
+		this.add(new JLabel(" "), gbc);
+		
+		// Suivant
+		gbc.gridx = 0;
+		gbc.gridy = 7;
 		b3.setText("Suivant");
 		b3.setEnabled(true);
 		b3.addActionListener(new ActionListener() {
@@ -155,7 +171,12 @@ public class Simulation extends JFrame {
 		 });
 		this.add(b3, gbc);
 		
-		//pack();
+		// Ajoute une ligne vide
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		this.add(new JLabel(" "), gbc);
+		
+		pack();
 		
 	}
 	
