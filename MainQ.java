@@ -8,7 +8,8 @@ public class MainQ {
 	AgentMultiple agglo = new AgentMultiple("titi");
 	agglo.ajouter(ag);
 	//agglo.afficher();
-	Descripteur temperature_aggreg = new Descripteur("temperature_aggreg", "float", 20);
+	Descripteur temperature_aggreg = new Descripteur("temperature_aggreg", "float", 
+	20);
 	Descripteur autreTemperature = new Descripteur("autre_temp","float");
 	Caracteristique CGlucose = new BioAgent("Cglucose");
 	CGlucose.setname("Glucose");

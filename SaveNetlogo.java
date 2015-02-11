@@ -41,28 +41,18 @@ public class SaveNetlogo{
 		try{
 		    
 			BufferedWriter buff=new BufferedWriter(new FileWriter(name+".nlogo"));
-			/*
-			File tmp = File.createTempFile("test",".tmp");
-			String absolutePath = tmp.getAbsolutePath();
-			System.out.println("File " + absolutePath);
-			*/
-			//buff.write("code:RADE");
-			//buff.newLine();
-			
-			// create pseudo-code
-			/*
-		    for(Process process : lprocess){
-		        output.write("process:"+process.getname()+"\n");
-		    }
-			*/
+
 			buff.write("@#$#@#$#@");
 			buff.newLine();
 			buff.write("GRAPHICS-WINDOW");
 			buff.newLine();
 			// create graphic window
+			System.out.println("fenetre b ");
 			createGraphicWindow(buff, env);
+			System.out.println("fenetre e ");
 			
 			// create buttons
+			System.out.println("button b ");
 			initFunctionButton(functionL);
 			for (int i=0; i<functionL.size();i++){
 			    buff.newLine();
@@ -72,51 +62,54 @@ public class SaveNetlogo{
 			    Xpos += i*Xlen;
 			    createButton(buff, functionName, Xpos, Ypos);
 			}
+			System.out.println("button e ");
 						
 			//create sliders
 			ArrayList<Agent> lagent = exp.getlagent();
 			Xpos = 0;
 			for (int i=0 ; i<lagent.size() ; i++){
-			    Agent agentCara = lagent.get(i);
-			    System.out.println("agent " + agentCara);
-			    String agentName = agentCara.getname();
-			    Caracteristique cara = agentCara.getCaracteristique();
-			    ArrayList<Descripteur> lDescripteur = new ArrayList<Descripteur>();
-			    lDescripteur = cara.getDescripteur();
-			    System.out.println("des len " + lDescripteur.size());
+			    System.out.println("agent " + i);
+                ArrayList<Descripteur> lDescripteur = new ArrayList<Descripteur>();
+                ArrayList<Float> lValue = new ArrayList<Float>();
+                ArrayList<Float> lTmp = new ArrayList<Float>();
+                
+                Agent agentCara = lagent.get(i);
+                String agentName = agentCara.getname();
+                Caracteristique cara = agentCara.getCaracteristique();
+                lDescripteur = cara.getDescripteur();
+			    String namePop = agentName + "_Pop";
+			    // TODO: pop a mettre dans le descripteur
                 for (int j=0 ; j<lDescripteur.size() ; j++){
+                    System.out.println("des " + j);
                     Descripteur des = lDescripteur.get(j);
                     String desName = des.getname();
                     String varName = agentName + "_" + desName;
+                    lValue = des.getvalues();
+                    float f = des.getvalue();
+                    System.out.println("float val " + f);
                     if (des.gettype()=="float"){
-                        float f = des.getvalue();
-                        System.out.println("des Value " + f);
+                        //float f = des.getvalue();
+                        //System.out.println("des Value " + f);
                         Ypos += Ylen;
-                        
-                        createSlider(buff, varName, Xpos, Ypos);
+                        createSlider(buff, varName, Xpos, Ypos, lValue);
                     } 
                     if (des.gettype()=="boolean"){
-                        createSwitch(buff, varName, Xpos, Ypos);
+                        createSwitch(buff, varName, Xpos, Ypos, lValue);
                     }
                 }
 			}
 			
 			/*
 			//reccup tous les descripteurs des agents et du type d'agent
-			// create slider, comment or switch
 			//if values: slider (default values if no information)
 			//if boolean: switch
-			for(BioAgent agent : lagent){
-				output.write("agent:"+agent.getname()+"\n");
-				agent.save(buff);
-				
-		    }
             */
             // create plot
             buff.newLine();
             endFile(buff);
 			buff.flush(); 
 			buff.close();
+			
 		}
 		catch(Exception e){System.out.println("Emergeance 1");} // toutes les exceptions
 	}
@@ -172,11 +165,14 @@ public class SaveNetlogo{
     }
     
     //create button 
-    public void createSwitch(BufferedWriter buff, String nameButton, int Xpos, int Ypos){
+    public void createSwitch(BufferedWriter buff, String nameButton, int Xpos, int Ypos, ArrayList<Float> value){
         String x = Integer.toString(Xpos);
         String y = Integer.toString(Ypos);
         String xl = Integer.toString(Xlen);
         String yl = Integer.toString(Ylen);
+        float fValue = value.get(0);
+        int iValue = (int)(Math.round(fValue));
+        String sValue = Integer.toString(iValue);
         try{ 
             buff.newLine();       
             buff.write("SWITCH");
@@ -204,15 +200,21 @@ public class SaveNetlogo{
     }
     
     //create button 
-    public void createSlider(BufferedWriter buff, String nameButton, int Xpos, int Ypos){
+    public void createSlider(BufferedWriter buff, String nameButton, int Xpos, int Ypos, ArrayList<Float> values){
         String x = Integer.toString(Xpos);
         String y = Integer.toString(Ypos);
         String xl = Integer.toString(Xlen);
         String yl = Integer.toString(Ylen);
+        String value1 = floatToString(values.get(0));
+        String min1 = floatToString(values.get(1));
+        String max1 = floatToString(values.get(2));
+        String pas1 = floatToString(values.get(3));
+        /*
         String min1 = "1";
         String max1 = "10";
         String value1 = "5";
         String pas1 = "1";
+        */
         try{   
             buff.newLine();     
             buff.write("SLIDER");
@@ -320,6 +322,10 @@ public class SaveNetlogo{
         catch(Exception e){System.out.println("Emergeance 4");} // toutes les exceptions
         
     }
-    
+    private String floatToString(float fVal){
+        int iValue = (int)(Math.round(fVal));
+        String sValue = Integer.toString(iValue);
+        return sValue;
+    }
 
 }
