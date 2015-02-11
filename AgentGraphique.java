@@ -12,7 +12,8 @@ public class AgentGraphique extends JFrame {
 	
 	public AgentGraphique(String titre) {
 		super(titre);
-		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 		this.setBackground(Color.white);
 		this.setLocationRelativeTo(this);

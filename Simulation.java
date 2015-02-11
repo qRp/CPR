@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 
 
 public class Simulation extends JFrame {
@@ -10,6 +12,7 @@ public class Simulation extends JFrame {
 	JLabel lab1 = new JLabel("");
 	JLabel lab2 = new JLabel("");
 	JLabel lab3 = new JLabel("");
+	JLabel lab4 = new JLabel("");
 
 	JPanel pan = new JPanel();
 	
@@ -26,12 +29,14 @@ public class Simulation extends JFrame {
 	JPanel envX = new JPanel();
 	JPanel envY = new JPanel();
 	JPanel envZ = new JPanel();
+	boolean env = false;
 	
-	boolean env = true;
+	JFormattedTextField saisiePop = new JFormattedTextField();
 	
 	public Simulation(String titre) {
 		super(titre);
-		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 		this.setBackground(Color.white);
 		this.setLocationRelativeTo(this);
@@ -48,7 +53,7 @@ public class Simulation extends JFrame {
 		// Titre
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.gridwidth = 3;
+		gbc.gridwidth = 4;
 		gbc.gridheight = 2;
 		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		pan.setBackground(Color.GRAY);
@@ -129,17 +134,46 @@ public class Simulation extends JFrame {
 		JScrollPane scroll3 = new JScrollPane(list4);
 		scroll3.createVerticalScrollBar();
 		this.add(scroll3, gbc);
-
-		// Logiciels
+		
+		//Population
 		gbc.gridx = 2;
 		gbc.gridy = 2;
-		lab3.setText("Logiciels");
+		lab3.setText("Population");
 		lab3.setFont(new Font("Capitals", Font.PLAIN, 20));
 		lab3.setForeground(new Color(136, 66, 29));
 		lab3.setPreferredSize(new Dimension(300, 100));
 		lab3.setHorizontalAlignment(0);
 		this.add(lab3, gbc);
 		gbc.gridx = 2;
+		gbc.gridy = 3;
+		try{
+		    MaskFormatter mask = new MaskFormatter("AAA"); // indique que le champ doit contenir : 3 chiffres ou lettres
+/*
+ * Pour le mask :
+ * chiffre : #
+ * caractere d'echappement : '
+ * lettre (les minuscules sont automatiquement changees en majuscules) : U
+ * lettre (les majuscules sont automatiquement changees en minuscules) : L
+ * chiffre ou lettre : A
+ * lettre : ?
+ * tous les caracteres : *
+ * tous les caracteres hexadecimaux sont acceptes (0-9, a-f et A-F) : H
+ */
+		    mask.install(saisiePop);
+		}catch(ParseException e){e.printStackTrace();}
+		saisiePop.setPreferredSize(new Dimension(100, 50));
+		this.add(saisiePop, gbc);
+		
+		// Logiciels
+		gbc.gridx = 3;
+		gbc.gridy = 2;
+		lab4.setText("Logiciels");
+		lab4.setFont(new Font("Capitals", Font.PLAIN, 20));
+		lab4.setForeground(new Color(136, 66, 29));
+		lab4.setPreferredSize(new Dimension(300, 100));
+		lab4.setHorizontalAlignment(0);
+		this.add(lab4, gbc);
+		gbc.gridx = 3;
 		gbc.gridy = 3;
 		String tabLog[] = {"NetLogo", "Log1", "Log2"};
 		JComboBox listLog = new JComboBox(tabLog);
@@ -156,7 +190,7 @@ public class Simulation extends JFrame {
 		// Ajoute une ligne vide
 		gbc.gridx = 0;
 		gbc.gridy = 6;
-		gbc.gridwidth = 3;
+		gbc.gridwidth = 4;
 		this.add(new JLabel(" "), gbc);
 		
 		// Suivant
@@ -178,6 +212,13 @@ public class Simulation extends JFrame {
 		
 		pack();
 		
+	}
+	
+	public void getTextEnvX(){
+		x = new Integer(saisieX.getText()).intValue();
+		y = new Integer(saisieY.getText()).intValue();
+		z = new Integer(saisieZ.getText()).intValue();
+		env = Fenetre.environnement(x,y,z);
 	}
 	
 	public String nameExp() {
@@ -210,7 +251,7 @@ public class Simulation extends JFrame {
 		 * D'abord doit verifier si tous les champs sont remplis
 		 * Puis envoie vers la page Comportements Agents
 		 */
-		BehaviourAgent bea = new BehaviourAgent(this.getTitle());
-		bea.setVisible(true);
+		ComportementsAgent cptA = new ComportementsAgent(this.getTitle());
+		cptA.setVisible(true);
 	}
 }

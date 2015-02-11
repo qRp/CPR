@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-public class BehaviourAgent extends JFrame{
+public class ComportementsAgent extends JFrame{
 	
 	JLabel label = new JLabel("");
 	JLabel lab = new JLabel("");
@@ -12,9 +12,10 @@ public class BehaviourAgent extends JFrame{
 	
 	JTabbedPane tabpan = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
-	public BehaviourAgent(String titre) {
+	public ComportementsAgent(String titre) {
 		super(titre);
-		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 		this.setBackground(Color.white);
 		this.setLocationRelativeTo(this);

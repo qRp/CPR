@@ -105,7 +105,6 @@ public class Fenetre extends JFrame {
 		label3.setPreferredSize(new Dimension(300, 100));
 		label3.setHorizontalAlignment(0);
 		this.add(label3, gbc);
-
 		// Button 
 		gbc.gridx = 1;
 		gbc.gridy = 3;
@@ -114,7 +113,7 @@ public class Fenetre extends JFrame {
 		bout2.setEnabled(true);
 		bout2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		 		experience();
+				experience();
 		 	}
 		 });
 		this.add(bout2, gbc);
@@ -191,17 +190,24 @@ public class Fenetre extends JFrame {
  		exp.setVisible(true);
  		String name = exp.nameExp();
  		
+ 		
+ 		
  		//Parser parserExp = new Parser(System.getProperty("user.dir")+"/Exp.txt");
  		//ArrayList<String> Lname = new ArrayList<String>();
  		//Lname = parserExp.processLineByLine();
  		
  		
 	}
-
+	public static boolean environnement(int x, int y, int z){
+		System.out.println("x : "+x);
+		return true;
+	}
 	
 	public void visu(){
 		System.out.println("visu");
 	}
+	
+	
 	
 	/** Creation de la barre de menu.
 	 * 
