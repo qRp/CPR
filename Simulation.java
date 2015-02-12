@@ -5,6 +5,9 @@ import java.text.ParseException;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
+import java.util.*;
+import java.io.*;
+
 
 public class Simulation extends JFrame {
 	JLabel label = new JLabel("");
@@ -131,7 +134,19 @@ public class Simulation extends JFrame {
 		
 		gbc.gridx = 1;
 		gbc.gridy = 4;
-		String c4[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"};
+		ArrayList<String> Lagent = new ArrayList<String>();
+		Parser parserAgent = new Parser(System.getProperty("user.dir")+"/Agent.txt");
+		try{
+		    Lagent = parserAgent.getListAgent();
+		}catch(IOException e){
+		    int toto=0;
+		}
+		String c4 [] = new String[Lagent.size()];
+		int i=0;
+		for(String str : Lagent){
+		    c4[i]=str;
+		    i++;
+		}
 		JList list4 = new JList(c4);
 		JScrollPane scroll3 = new JScrollPane(list4);
 		scroll3.createVerticalScrollBar();
