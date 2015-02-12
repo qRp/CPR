@@ -64,7 +64,7 @@ public class Fenetre extends JFrame {
 		ImageIcon icone = new ImageIcon("ag.jpg");
 		JLabel img = new JLabel("", icone, JLabel.LEFT);
 		img.setIconTextGap(10);
-		img.setBorder(BorderFactory.createEmptyBorder(0,50,0,50));
+		img.setBorder(BorderFactory.createEmptyBorder(0,0,0,40));
 		pan.add(img);
 		pan.add(label1);
 		pan.add(lab);

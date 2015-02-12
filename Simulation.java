@@ -8,7 +8,8 @@ import javax.swing.text.MaskFormatter;
 
 public class Simulation extends JFrame {
 	JLabel label = new JLabel("");
-	JLabel lab = new JLabel("");
+	JLabel labtitre = new JLabel("");
+	
 	JLabel lab1 = new JLabel("");
 	JLabel lab2 = new JLabel("");
 	JLabel lab3 = new JLabel("");
@@ -58,22 +59,22 @@ public class Simulation extends JFrame {
 		gbc.gridheight = 2;
 		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		pan.setBackground(Color.GRAY);
+		//pan.setPreferredSize(getMaximumSize());
 		label.setForeground(Color.orange);
 		label.setText(titre);
 		label.setFont(new Font("Courier", Font.BOLD, 30));
-		label.setBorder(BorderFactory.createEmptyBorder(0,70,70,0));
-		lab.setText("Simulation de systemes multi-agents");
-		lab.setFont(new Font("TimesRoman", Font.ITALIC, 11));
-		lab.setBorder(BorderFactory.createEmptyBorder(70,0,0,50));
+		label.setBorder(BorderFactory.createEmptyBorder(0,70,70,00));
+		labtitre.setText("Simulation");
+		labtitre.setFont(new Font("Capitals", Font.PLAIN, 18));
+		labtitre.setBorder(BorderFactory.createEmptyBorder(70,0,0,50));
 		ImageIcon icone = new ImageIcon("ag.jpg");
 		JLabel img = new JLabel("", icone, JLabel.LEFT);
 		img.setIconTextGap(10);
-		img.setBorder(BorderFactory.createEmptyBorder(0,50,0,50));
+		img.setBorder(BorderFactory.createEmptyBorder(0,0,0,40));
 		pan.add(img);
 		pan.add(label);
-		pan.add(lab);
+		pan.add(labtitre);
 		this.add(pan, gbc);
-		
 		
 		// Environnement
 		gbc.gridx = 0;
@@ -272,6 +273,7 @@ public class Simulation extends JFrame {
 		if (!envOk){
 			envOk = getTextEnvX();
 		}
+		//boolean envOk = true; //pour le test
 		if (envOk) {
 			ComportementsAgent cptA = new ComportementsAgent(this.getTitle());
 			cptA.setVisible(true);
