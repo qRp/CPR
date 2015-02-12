@@ -1,2 +1,16 @@
 name:toto
 name:titi
+name:tata
+caracteristique:CglucoseGlucose
+name:tata
+caracteristique:CglucoseGlucose
+name:tata
+caracteristique:CglucoseGlucose
+name:tata
+caracteristique:CglucoseGlucose
+name:tata
+caracteristique:CglucoseGlucose
+name:tata
+caracteristique:CglucoseGlucose
+name:tata
+caracteristique:CglucoseGlucose

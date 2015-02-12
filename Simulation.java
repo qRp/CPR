@@ -1,12 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
-
-import java.util.*;
-import java.io.*;
 
 
 public class Simulation extends JFrame {
@@ -36,7 +35,9 @@ public class Simulation extends JFrame {
 	JPanel envZ = new JPanel();
 	boolean env = false;
 	
-	JFormattedTextField saisiePop = new JFormattedTextField();
+	int pop;
+	JFormattedTextField saisiePop = new JFormattedTextField(new Integer(pop));
+	JPanel panPop = new JPanel();
 	
 	public Simulation(String titre) {
 		super(titre);
@@ -163,23 +164,11 @@ public class Simulation extends JFrame {
 		this.add(lab3, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 3;
-		try{
-		    MaskFormatter mask = new MaskFormatter("AAA"); // indique que le champ doit contenir : 3 chiffres ou lettres
-/*
- * Pour le mask :
- * chiffre : #
- * caractere d'echappement : '
- * lettre (les minuscules sont automatiquement changees en majuscules) : U
- * lettre (les majuscules sont automatiquement changees en minuscules) : L
- * chiffre ou lettre : A
- * lettre : ?
- * tous les caracteres : *
- * tous les caracteres hexadecimaux sont acceptes (0-9, a-f et A-F) : H
- */
-		    mask.install(saisiePop);
-		}catch(ParseException e){e.printStackTrace();}
-		saisiePop.setPreferredSize(new Dimension(100, 50));
-		this.add(saisiePop, gbc);
+		// Champs de saisie pour pop
+		saisiePop.setPreferredSize(new Dimension(150, 20));
+		panPop.add(saisiePop);
+		this.add(panPop, gbc);
+		
 		
 		// Logiciels
 		gbc.gridx = 3;
@@ -199,7 +188,7 @@ public class Simulation extends JFrame {
 		 		JComboBox cb = (JComboBox)e.getSource();// chaque element de la CB
 		        //String name = (String)cb.getSelectedItem();
 		        //updateLabel();
-		 		//System.out.println("combo");
+		 		
 		 	}
 		 });
 		this.add(listLog,gbc);
@@ -284,11 +273,11 @@ public class Simulation extends JFrame {
 		 * Puis envoie vers la page Comportements Agents
 		 */
 		//verification des champs de Environnement
-		boolean envOk = false;
-		if (!envOk){
-			envOk = getTextEnvX();
-		}
-		//boolean envOk = true; //pour le test
+		//boolean envOk = false;
+		//if (!envOk){
+		//	envOk = getTextEnvX();
+	//	}
+		boolean envOk = true; //pour le test
 		if (envOk) {
 			ComportementsAgent cptA = new ComportementsAgent(this.getTitle());
 			cptA.setVisible(true);
