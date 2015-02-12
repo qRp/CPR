@@ -28,7 +28,7 @@ public class MainQ {
 	//test.afficher();
 	
 	Environnement env = new Environnement(20,20,20,"testEnvironnement");
-	SaveNetlogo sn = new SaveNetlogo("testFile", proces, exp, env);
+	SaveNetlogo sn = new SaveNetlogo(exp);
 	sn.writeFile();
     }
 }
