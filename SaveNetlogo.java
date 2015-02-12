@@ -112,7 +112,7 @@ public class SaveNetlogo{
 	        String nameP = p.getname();
 	        ArrayList<Agent> lAgent = new ArrayList<Agent>();
 	        for (int i=0 ; i<lAgent.size() ; i++){
-	            Agent agentCara = lagent.get(i);
+	            Agent agentCara = lAgent.get(i);
 	            System.out.println(agentCara);
 	        }
 	    }
