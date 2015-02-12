@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Process{
     private String name;
-    private ArrayList<Agent> lagent = new ArrayList<Agent>();
+    private Agent agent;
 
 
     public Process(String nname){
