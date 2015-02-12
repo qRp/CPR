@@ -21,6 +21,7 @@ public class Simulation extends JFrame {
 	JButton b3 = new JButton();
 	
 	String name = "";
+	JOptionPane jop = new JOptionPane();
 	
 	int x, y, z ;
 	JFormattedTextField saisieX = new JFormattedTextField(new Integer(x));
@@ -214,11 +215,26 @@ public class Simulation extends JFrame {
 		
 	}
 	
-	public void getTextEnvX(){
-		x = new Integer(saisieX.getText()).intValue();
-		y = new Integer(saisieY.getText()).intValue();
-		z = new Integer(saisieZ.getText()).intValue();
-		env = Fenetre.environnement(x,y,z);
+	public boolean getTextEnvX(){
+		try {
+			x = new Integer(saisieX.getText()).intValue();
+			y = new Integer(saisieY.getText()).intValue();
+			z = new Integer(saisieZ.getText()).intValue();
+			if (x == 0 || y == 0 || z == 0){
+				jop.showMessageDialog(null, "Vous devez remplir tous les champs !", "Attention", JOptionPane.INFORMATION_MESSAGE);
+				return false;
+			}
+			else{
+				env = Fenetre.environnement(x,y,z);
+				return true;
+			}
+			
+		} 
+	    catch(NullPointerException npe) {
+	        System.out.println("Saisie annulee"); 
+	        this.dispose();
+	        return false;
+	    }
 	}
 	
 	public String nameExp() {
@@ -251,7 +267,14 @@ public class Simulation extends JFrame {
 		 * D'abord doit verifier si tous les champs sont remplis
 		 * Puis envoie vers la page Comportements Agents
 		 */
-		ComportementsAgent cptA = new ComportementsAgent(this.getTitle());
-		cptA.setVisible(true);
+		//verification des champs de Environnement
+		boolean envOk = false;
+		if (!envOk){
+			envOk = getTextEnvX();
+		}
+		if (envOk) {
+			ComportementsAgent cptA = new ComportementsAgent(this.getTitle());
+			cptA.setVisible(true);
+		}
 	}
 }
