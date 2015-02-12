@@ -16,10 +16,15 @@ public class ComportementsAgent extends JFrame{
 	JButton b1 = new JButton();
 	JButton b2 = new JButton();
 	
-	//JTabbedPane tabpan = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-	JTabbedPane tabpan = new JTabbedPane(SwingConstants.TOP);
+	JTabbedPane tabpan = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+	//JTabbedPane tabpan = new JTabbedPane(SwingConstants.TOP);
 	JPanel pan1 = new JPanel();
 	JPanel pan2 = new JPanel();
+	
+	float coeff;
+	JFormattedTextField saisieCoeff = new JFormattedTextField(new Float(coeff));
+	JPanel panCoeff = new JPanel();
+	JLabel labCoeff = new JLabel();
 
 	public ComportementsAgent(String titre) {
 		super(titre);
@@ -40,7 +45,7 @@ public class ComportementsAgent extends JFrame{
 		// Titre
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.gridwidth = 3;
+		gbc.gridwidth = 4;
 		gbc.gridheight = 2;
 		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		pan.setBackground(Color.GRAY);
@@ -60,7 +65,7 @@ public class ComportementsAgent extends JFrame{
 		pan.add(lab);
 		this.add(pan, gbc);
 		
-		// Liste d'agents
+		// Liste d'agents selectionnes de la page simulation
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;
@@ -99,14 +104,46 @@ public class ComportementsAgent extends JFrame{
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.gridheight = 3;
-		gbc.gridwidth = 2;
+		gbc.gridwidth = 3;
 
-		pan1.setBackground(Color.blue);
-		lab2.setText("bonjour");
-		lab2.setPreferredSize(new Dimension(300, 100));
-		
+		//pan1.setBackground(Color.blue);
+		//GridLayout onglet1 = new GridLayout(3, 3, 20, 20);//col, ligne, separation de pixel
+	    //pan1.setLayout(onglet1);
+	    //pan1.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+	    
+		lab2.setText("Agents");
+		lab2.setFont(new Font("Capitals", Font.PLAIN, 20));
+		lab2.setForeground(new Color(136, 66, 29));
+		lab2.setPreferredSize(new Dimension(500, 300));
+		lab2.setHorizontalAlignment(0);
+		//lab2.setAlignmentX(BOTTOM_ALIGNMENT);
 		pan1.add(lab2);
-		pan1.add(b1);
+		String tab2[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"};
+		JList listAg2 = new JList(tab2);
+		JScrollPane scroll2 = new JScrollPane(listAg2);
+		scroll2.createVerticalScrollBar();
+		pan1.add(scroll2);
+		String typeFix[] = {"Haribo", "Carambars", "Sucettes"};
+		JComboBox listFix = new JComboBox(typeFix);
+		listFix.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) { 
+		 		JComboBox cb = (JComboBox)e.getSource();// chaque element de la CB
+		 	}
+		 });
+		pan1.add(listFix);
+		
+		// Champs de saisie pour coefficient
+		saisieCoeff.setPreferredSize(new Dimension(150, 20));
+		//saisieCoeff.setAlignmentX(BOTTOM_ALIGNMENT);
+		
+		labCoeff.setText("Coefficient");
+		labCoeff.setFont(new Font("Capitals", Font.PLAIN, 20));
+		labCoeff.setForeground(new Color(136, 66, 29));
+		//labCoeff.setPreferredSize(new Dimension(500, 300));
+		//labCoeff.setHorizontalAlignment(0);
+		//pan1.add(labCoeff);
+		pan1.add(saisieCoeff);
+		//pan1.add(panCoeff);
 		
 		pan2.setBackground(Color.yellow);
 		lab3.setText("bonsoir");
