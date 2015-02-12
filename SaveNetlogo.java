@@ -6,32 +6,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 import java.io.File;
+//import org.nlogo.app.App;
 
 public class SaveNetlogo{
     private String name;
-    /*
     private ArrayList<Process> lprocess = new ArrayList<Process>();
-    private ArrayList<BioAgent> lagent = new ArrayList<BioAgent>();
-    */
-    private Process lprocess;
+    //private Process lprocess;
     private Experience exp;
     private ArrayList<String> fonctionButton = new ArrayList<String>();
     private int Xlen = 140;
     private int Ylen = 40;
     private Environnement env;
 
-/*
-    public SaveNetlogo(String nameFile, ArrayList<Process> processes, ArrayList<BioAgent> bioagent, Environnement envSimu){
-	name = nameFile;
-	lprocess = processes;
-	lagent = bioagent;
-    }
-*/
-    public SaveNetlogo(String nameFile, Process processes, Experience expe, Environnement env2D){
-	    name = nameFile;
-	    lprocess = processes;
+    public SaveNetlogo(Experience expe){
 	    exp = expe;
-	    env = env2D;
     }    
     
     public void writeFile(){
@@ -39,9 +27,12 @@ public class SaveNetlogo{
         int Ypos = 0; 
         ArrayList<String> functionL = new ArrayList<String>();
 		try{
-		    
+			env = exp.getenvironnement();
+			name = exp.getname();
 			BufferedWriter buff=new BufferedWriter(new FileWriter(name+".nlogo"));
 
+            createCode(exp);            
+            
 			buff.write("@#$#@#$#@");
 			buff.newLine();
 			buff.write("GRAPHICS-WINDOW");
@@ -112,6 +103,19 @@ public class SaveNetlogo{
 			
 		}
 		catch(Exception e){System.out.println("Emergeance 1");} // toutes les exceptions
+	}
+	
+	private void createCode(Experience exp){
+	    lprocess = exp.getlprocess();
+	    for (int j=0 ; j<lprocess.size() ; j++){
+            Process p = lprocess.get(j);
+	        String nameP = p.getname();
+	        ArrayList<Agent> lAgent = new ArrayList<Agent>();
+	        for (int i=0 ; i<lAgent.size() ; i++){
+	            Agent agentCara = lagent.get(i);
+	            System.out.println(agentCara);
+	        }
+	    }
 	}
 
     private void initFunctionButton(ArrayList<String> functionButton){
