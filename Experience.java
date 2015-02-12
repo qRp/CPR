@@ -5,9 +5,13 @@ public class Experience{
     private String name;
     private ArrayList<Process> lprocess = new ArrayList<Process>();
     private ArrayList<Agent> lagent = new ArrayList<Agent>();
+    ptivate Environnement environnement;
 
     public Experience(String nname){
 	name=nname;
+    }
+    public Environnement getenvironnement(){
+	return environnement;
     }
     public void add_process(Process process){
 	lprocess.add(process);
