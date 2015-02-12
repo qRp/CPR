@@ -17,8 +17,11 @@ public class MainQ {
 	CGlucose.ajouter(autreTemperature);
 	ag.setCaracteristique(CGlucose);
 	agglo.setCaracteristique(CGlucose);
+	ArrayList<Agent> test = new ArrayList<Agent>();
+	test.add(ag);
 	Experience exp= new Experience("exp");
-	Process proces=new Process("fixe");
+	Process proces=new Fixation("fixe");
+	Process proces2= new Fixation("toto", "head", 0.9);
 	exp.add_agent(ag);
 	exp.add_agent(agglo);
 	exp.add_process(proces);
