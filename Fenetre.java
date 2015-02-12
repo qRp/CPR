@@ -6,6 +6,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultEditorKit;
 
 import java.util.*;
+import java.io.*;
 
 
 public class Fenetre extends JFrame {
@@ -143,7 +144,19 @@ public class Fenetre extends JFrame {
 		gbc.gridx = 2;
 		gbc.gridy = 4;
 		gbc.gridheight = 2;
-		String tab1[] = {"tata.nlogo","tete.nlogo","titi.nlogo","toto.nlogo","tutu.nlogo","tyty.nlogo"};
+		ArrayList<String> Lexp = new ArrayList<String>();
+		Parser parserExp = new Parser(System.getProperty("user.dir")+"/Exp.txt");
+		try{
+		    Lexp = parserExp.getListExp();
+	        }catch(IOException e){
+		    int toto=0;
+		    }
+		String tab1 [] = new String[Lexp.size()];
+		int i=0;
+		for(String str : Lexp){
+		    tab1[i]=str;
+		    i++;
+		}
 		JList list1 = new JList(tab1);
 		JScrollPane scroll = new JScrollPane(list1);
 		scroll.createVerticalScrollBar();
