@@ -13,6 +13,9 @@ public class Experience{
     public Environnement getenvironnement(){
 	return environnement;
     }
+    public void setEnvironnement(Environnement eenvironnement){
+	environnement=eenvironnement;
+    }
     public void add_process(Process process){
 	lprocess.add(process);
     }
@@ -37,6 +40,7 @@ public class Experience{
 	for(Process process : lprocess){
 	    process.afficher();
 	}
+	environnement.afficher();
     }
     public void ecrire(){
 	//on va chercher le chemin et le nom du fichier et on me tout ca dans un String
