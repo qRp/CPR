@@ -1,15 +1,7 @@
 name:toto
+caracteristique:super
 name:titi
-name:tata
-caracteristique:CglucoseGlucose
-name:tata
-caracteristique:CglucoseGlucose
-name:tata
-caracteristique:CglucoseGlucose
-name:tata
-caracteristique:CglucoseGlucose
-name:tata
-caracteristique:CglucoseGlucose
+caracteristique:tomate
 name:tata
 caracteristique:CglucoseGlucose
 name:tata
