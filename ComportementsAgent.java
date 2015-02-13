@@ -14,21 +14,24 @@ public class ComportementsAgent extends JFrame{
 	JLabel lab1 = new JLabel("");
 	JLabel lab2 = new JLabel("");
 	JLabel lab3 = new JLabel("");
-        JButton b = new JButton();
+    JButton b = new JButton();
 	JButton b1 = new JButton();
 	JButton b2 = new JButton();
 	
 	JTabbedPane tabpan = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-	JPanel pan1 = new JPanel();
-	JPanel pan2 = new JPanel();
+	//JTabbedPane tabpan = new JTabbedPane();
+	JPanel panel1 = new JPanel();
+	JPanel panel2 = new JPanel();
 	
 	float coeff;
 	JFormattedTextField saisieCoeff = new JFormattedTextField(new Float(coeff));
 	JPanel panCoeff = new JPanel();
 	JLabel labCoeff = new JLabel();
-        JList listAg;
-        JList listAg2;
+    JList listAg;
+    JList listAg2;
     JComboBox listFix;
+
+   
 
     public ComportementsAgent(String titre, Object[] tableau, Experience exp1){
 		super(titre);
@@ -98,12 +101,13 @@ public class ComportementsAgent extends JFrame{
 		final Experience exp = exp1;		
 		b1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-			    valide_comp(exp);
+			    //valide_comp(exp);
+		 		System.out.println("valider les comportements");
 		 	}
 		 });
 		this.add(b1, gbc);
 	
-
+		// Bouton RUN
 		gbc.gridx = 1;
 		gbc.gridy = 5;
 		b.setText("RUN");
@@ -121,72 +125,59 @@ public class ComportementsAgent extends JFrame{
 		gbc.gridy = 2;
 		gbc.gridheight = 3;
 		gbc.gridwidth = 3;
-	    
-		lab2.setText("Agents");
-		lab2.setFont(new Font("Capitals", Font.PLAIN, 20));
-		lab2.setForeground(new Color(136, 66, 29));
-		lab2.setPreferredSize(new Dimension(500, 300));
-		lab2.setHorizontalAlignment(0);
-		pan1.add(lab2);
-		String tabtemp []= new String[tableau.length];
-		for(int ii=0; ii<tableau.length;ii++){
-			String temp=(String)tableau[ii];
-			tabtemp[ii]=temp;
-		}
-		listAg2 = new JList(tabtemp);
-		JScrollPane scroll2 = new JScrollPane(listAg2);
-		scroll2.createVerticalScrollBar();
-		pan1.add(scroll2);
-		String typeFix[] = {"Tête et queue", "Tête", "Indifferencie"};
-		listFix = new JComboBox(typeFix);
-		//		listFix.addActionListener(new ActionListener() {
-		//	public void actionPerformed(ActionEvent e) { 
-		//		 		listFix = (JComboBox)e.getSource();// chaque element de la CB
-		// 	}
-		//	 });
-		pan1.add(listFix);
-		
-		// Champs de saisie pour coefficient
-		saisieCoeff.setPreferredSize(new Dimension(150, 20));
-		//saisieCoeff.setAlignmentX(BOTTOM_ALIGNMENT);
-		
-		labCoeff.setText("Coefficient");
-		labCoeff.setFont(new Font("Capitals", Font.PLAIN, 20));
-		labCoeff.setForeground(new Color(136, 66, 29));
-		//labCoeff.setPreferredSize(new Dimension(500, 300));
-		//labCoeff.setHorizontalAlignment(0);
-		//pan1.add(labCoeff);
-		pan1.add(saisieCoeff);
-		//pan1.add(panCoeff);
-		
-
-		lab3.setText("bonsoir");
-		lab3.setPreferredSize(new Dimension(300, 100));
-		pan2.add(lab3);
-		
-        tabpan.addTab("Onglet 1", null, pan1, "comportement de fixation");
-        tabpan.addTab("Onglet 2", null, pan2, "comportement de predation TODO");
+		final Object[] tabOnglet = tableau;
+		onglet1(tabOnglet);
+		tabpan.addTab("Onglet 1", null, panel1, "Comportement de fixation");
+        tabpan.addTab("Onglet 2", null, panel2, "Comportement de predation TODO");
         tabpan.setTitleAt(0,"Fixation");
         tabpan.setTitleAt(1,"Predation"); 
-        
         this.add(tabpan, gbc);
-        
+		
 		pack();
 	}
 	
+   public void onglet1(Object [] tabOnglet){
+	   panel1.setLayout( new GridLayout(2,3) );
+	 
+	   lab2.setText("Agents");
+	   lab2.setFont(new Font("Capitals", Font.PLAIN, 20));
+	   lab2.setForeground(new Color(136, 66, 29));
+	   lab2.setHorizontalAlignment(0);
+	   panel1.add(lab2, BorderLayout.WEST);
+	   String tabtemp []= new String[tabOnglet.length];
+	   for(int ii=0; ii<tabOnglet.length;ii++){
+			String temp=(String)tabOnglet[ii];
+			tabtemp[ii]=temp;
+	   }
+	   listAg2 = new JList(tabtemp);
+	   JScrollPane scroll2 = new JScrollPane(listAg2);
+	   scroll2.createVerticalScrollBar();
+	   panel1.add(scroll2, BorderLayout.WEST);
+	   String typeFix[] = {"Tete et queue", "Tete", "Indifferencie"};
+	   listFix = new JComboBox(typeFix);
+	   panel1.add(listFix, BorderLayout.NORTH);
+	   labCoeff.setText("Coefficient :");
+	   labCoeff.setFont(new Font("Capitals", Font.PLAIN, 20));
+	   labCoeff.setForeground(new Color(136, 66, 29));
+	   labCoeff.setHorizontalAlignment(0);
+	   panel1.add(labCoeff, BorderLayout.SOUTH);
+	   //saisieCoeff.setPreferredSize(new Dimension(60, 20));
+	   panel1.add(saisieCoeff, BorderLayout.SOUTH);
+   }
+    
     public void valide_comp(Experience exp){
 	Object[] tableau1=listAg.getSelectedValues();
 	Object[] tableau2=listAg2.getSelectedValues();
 	Agent agenttemp;
 	try{
 	    Parser parser = new Parser(System.getProperty("user.dir")+"/Agent.txt");
-	    String temp =(String)tableau1[0];
+	    String temp = (String) tableau1[0];
 	    Agent agent=parser.getAgent(temp);
 	    ArrayList<Agent> lagent = new ArrayList<Agent>();
 	    for(int iv=0; iv<tableau2.length;iv++){
-		String tempiv=(String)tableau2[iv];
-		agenttemp=parser.getAgent(tempiv);
-		lagent.add(agenttemp);
+	    	String tempiv=(String)tableau2[iv];
+	    	agenttemp=parser.getAgent(tempiv);
+	    	lagent.add(agenttemp);
 	    }
 	    String type =(String)listFix.getSelectedItem();
 	  
@@ -197,7 +188,7 @@ public class ComportementsAgent extends JFrame{
 	    exp.afficher();
 	}
 	catch(IOException e){
-	    System.out.println("FATAL ERROR SYSTEM");
+	    System.out.println("FATAL ERROR SYSTEM - ComportementsAgent.java");
 	}
     }
 

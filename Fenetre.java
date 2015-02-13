@@ -25,6 +25,7 @@ public class Fenetre extends JFrame {
 	JButton bout3 = new JButton();
 	JButton b4 = new JButton();
 	
+	JList list1;
 
 	/** Constructeur.
 	 * 
@@ -71,7 +72,7 @@ public class Fenetre extends JFrame {
 		pan.add(lab);
 		this.add(pan, gbc);
 		
-		// Label Gestion molecules
+		// Gestion molecules
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;
@@ -81,9 +82,7 @@ public class Fenetre extends JFrame {
 		label2.setForeground(new Color(136, 66, 29));
 		label2.setPreferredSize(new Dimension(300, 100));
 		label2.setHorizontalAlignment(0);
-		this.add(label2, gbc);
-
-		// Button 
+		this.add(label2, gbc); 
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		bout1.setText("Molecules");
@@ -95,7 +94,7 @@ public class Fenetre extends JFrame {
 		 });
 		this.add(bout1, gbc);
 
-		// Label Gestion experiences
+		// Gestion experiences
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;
@@ -106,7 +105,6 @@ public class Fenetre extends JFrame {
 		label3.setPreferredSize(new Dimension(300, 100));
 		label3.setHorizontalAlignment(0);
 		this.add(label3, gbc);
-		// Button 
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		bout2.setText("Experiences");
@@ -118,7 +116,6 @@ public class Fenetre extends JFrame {
 		 	}
 		 });
 		this.add(bout2, gbc);
-		
 		
 		// Visualisation resultats
 		gbc.gridx = 2;
@@ -134,7 +131,6 @@ public class Fenetre extends JFrame {
 		gbc.gridy = 3;
 		b4.setText("Visualiser");
 		b4.setEnabled(true);
-		//b4.setBorder(BorderFactory.createMatteBorder(0,5,0,0,new Color(231, 62, 1)));
 		b4.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) { 
 			visu();
@@ -148,28 +144,28 @@ public class Fenetre extends JFrame {
 		Parser parserExp = new Parser(System.getProperty("user.dir")+"/Exp.txt");
 		try{
 		    Lexp = parserExp.getListExp();
-	        }catch(IOException e){
-		    int toto=0;
-		    }
+	    }
+		catch(IOException e){
+			System.out.println("FATAL ERROR SYSTEM - Fenetre.java");
+		}
 		String tab1 [] = new String[Lexp.size()];
 		int i=0;
 		for(String str : Lexp){
 		    tab1[i]=str;
 		    i++;
 		}
-		JList list1 = new JList(tab1);
+		list1 = new JList(tab1);
 		JScrollPane scroll = new JScrollPane(list1);
 		scroll.createVerticalScrollBar();
-		//scroll.setBorder(BorderFactory.createMatteBorder(0,5,0,0,new Color(231, 62, 1)));
 		this.add(scroll, gbc);		
 		
-		// Ajoute une ligne vide
+		// Ligne vide
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		gbc.gridheight = 2;
 		this.add(new JLabel(" "), gbc);
 
-		// Button quitter
+		// Bouton Quitter
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		gbc.gridwidth = 2;
@@ -183,16 +179,16 @@ public class Fenetre extends JFrame {
 		});
 		this.add(bout3, gbc);
 
-		// Ajoute une ligne vide
+		// Ligne vide
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		gbc.gridwidth = 3;
 		this.add(new JLabel(" "), gbc);
 
-		// Reduire la fenetre a sa juste valeur pour contenir le tout
 		pack();
 
 	}
+	
 	public void molecule(){
 		AgentGraphique ag = new AgentGraphique(this.getTitle());
 		ag.setVisible(true);
@@ -201,8 +197,7 @@ public class Fenetre extends JFrame {
 	public void experience(){
 		Simulation expG = new Simulation(this.getTitle());
  		expG.setVisible(true);
- 		String name = expG.nameExp();
- 		
+ 		String name = expG.nameExp();	
 	}
 	
 	public void visu(){

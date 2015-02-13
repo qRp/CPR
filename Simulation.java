@@ -25,7 +25,7 @@ public class Simulation extends JFrame {
 	
 	String name = "";
 	JOptionPane jop = new JOptionPane();
-        JList list4;
+    JList list4;
         
 	
 	int x, y, z ;
@@ -50,11 +50,9 @@ public class Simulation extends JFrame {
 		this.setLocationRelativeTo(this);
 		this.setSize(840, 600);
 		
-	
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		this.setLayout(gbl);
-
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.CENTER;
 				
@@ -65,7 +63,6 @@ public class Simulation extends JFrame {
 		gbc.gridheight = 2;
 		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		pan.setBackground(Color.GRAY);
-		//pan.setPreferredSize(getMaximumSize());
 		label.setForeground(Color.orange);
 		label.setText(titre);
 		label.setFont(new Font("Courier", Font.BOLD, 30));
@@ -90,10 +87,10 @@ public class Simulation extends JFrame {
 		lab1.setText("Environnement");
 		lab1.setFont(new Font("Capitals", Font.PLAIN, 20));
 		lab1.setForeground(new Color(136, 66, 29));
-		
 		lab1.setPreferredSize(new Dimension(300, 100));
 		lab1.setHorizontalAlignment(0);
 		this.add(lab1, gbc);
+		
 		// Champs de saisie pour x, y, z
 		gbc.gridx = 0;
 		gbc.gridy = 3;
@@ -113,7 +110,6 @@ public class Simulation extends JFrame {
 		envZ.add(new JLabel("Z :"));
 		envZ.add(saisieZ);
 		this.add(envZ, gbc);
-		
 		
 		// Agents
 		gbc.gridx = 1;
@@ -141,8 +137,9 @@ public class Simulation extends JFrame {
 		Parser parserAgent = new Parser(System.getProperty("user.dir")+"/Agent.txt");
 		try{
 		    Lagent = parserAgent.getListAgent();
-		}catch(IOException e){
-		    int toto=0;
+		}
+		catch(IOException e){
+			System.out.println("FATAL ERROR SYSTEM - Simulation.java");
 		}
 		String c4 [] = new String[Lagent.size()];
 		int i=0;
@@ -151,7 +148,6 @@ public class Simulation extends JFrame {
 		    i++;
 		}
 		list4 = new JList(c4);
-		
 		JScrollPane scroll3 = new JScrollPane(list4);
 		scroll3.createVerticalScrollBar();
 		this.add(scroll3, gbc);
@@ -167,11 +163,9 @@ public class Simulation extends JFrame {
 		this.add(lab3, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 3;
-		// Champs de saisie pour pop
 		saisiePop.setPreferredSize(new Dimension(150, 20));
 		panPop.add(saisiePop);
 		this.add(panPop, gbc);
-		
 		
 		// Logiciels
 		gbc.gridx = 3;
@@ -186,23 +180,15 @@ public class Simulation extends JFrame {
 		gbc.gridy = 3;
 		String tabLog[] = {"NetLogo", "Log1", "Log2"};
 		JComboBox listLog = new JComboBox(tabLog);
-		listLog.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent e) { 
-		 		JComboBox cb = (JComboBox)e.getSource();// chaque element de la CB
-		        //String name = (String)cb.getSelectedItem();
-		        //updateLabel();
-		 		
-		 	}
-		 });
 		this.add(listLog,gbc);
 		
-		// Ajoute une ligne vide
+		// Ligne vide
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		gbc.gridwidth = 4;
 		this.add(new JLabel(" "), gbc);
 		
-		// Suivant
+		// Bouton Suivant
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		b3.setText("Suivant");
@@ -214,7 +200,7 @@ public class Simulation extends JFrame {
 		 });
 		this.add(b3, gbc);
 		
-		// Ajoute une ligne vide
+		// Ligne vide
 		gbc.gridx = 0;
 		gbc.gridy = 8;
 		this.add(new JLabel(" "), gbc);
@@ -223,21 +209,18 @@ public class Simulation extends JFrame {
 		
 	}
 	
-	public void getTextEnvX(){
+	public void getTextEnv(){
 		try {
 			x = new Integer(saisieX.getText()).intValue();
 			y = new Integer(saisieY.getText()).intValue();
 			z = new Integer(saisieZ.getText()).intValue();
-
 			if(x==0){x=1;}
 			if(y==0){y=1;}
-			if(z==0){z=1;}			
-					
+			if(z==0){z=1;}	
 		} 
 	    catch(NullPointerException npe) {
 	        System.out.println("Saisie annulee"); 
 	        this.dispose();
-	        
 	    }
 	}
 	
@@ -267,11 +250,11 @@ public class Simulation extends JFrame {
 	
 	public void run(){
 		System.out.println("run");
-		getTextEnvX();
+		getTextEnv();
 		Experience exp = new Experience(name);
 		Environnement environnement = new Environnement(x,y,z);
 		exp.setEnvironnement(environnement);
-		Object[] tab=list4.getSelectedValues();
+		Object[] tab= list4.getSelectedValues();
 		try{
 		    Parser parser = new Parser(System.getProperty("user.dir")+"/Agent.txt");
 		    for(int iii=0; iii<tab.length;iii++){
@@ -281,9 +264,8 @@ public class Simulation extends JFrame {
 		    }
 		}
 		catch(IOException e){
-		    int toto=0;
+		    System.out.println("FATAL ERROR SYSTEM - Simulation.java");;
 		    }
-
 		exp.afficher();
 		ComportementsAgent cptA = new ComportementsAgent(this.getTitle(), tab, exp);
 		cptA.setVisible(true);
