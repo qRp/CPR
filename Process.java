@@ -4,7 +4,7 @@ import java.util.*;
 public class Process{
     private String name;
     private Agent agent;
-
+    private ArrayList<Agent> agentsCibles = new ArrayList<Agent>();
 
     public Process(String nname){
 	name=nname;
