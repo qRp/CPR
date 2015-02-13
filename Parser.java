@@ -62,9 +62,7 @@ public class Parser {
 		    value=getvalue(line);
 		    if(name.equals("caracteristique")){
 			Caracteristique caracteristique =new Caracteristique(value);
-			System.out.println(caracteristique.getname());
 			agent.setCaracteristique(caracteristique);
-			System.out.println(agent.getCaracteristique().getname());			
 		    }
 		}
 		return agent;

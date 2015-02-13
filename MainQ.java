@@ -20,11 +20,8 @@ public class MainQ {
 	ArrayList<Agent> test = new ArrayList<Agent>();
 	test.add(ag);
 	Experience exp= new Experience("exp");
-	Process proces=new Fixation("fixe");
-	Process proces2= new Fixation("toto", "head", 0.9);
 	exp.add_agent(ag);
 	exp.add_agent(agglo);
-	exp.add_process(proces);
 	ag.ecrire();
 	Parser parserAg = new Parser(System.getProperty("user.dir") + "/Agent.txt");
 	//Agent test=parserAg.getAgent("tatait");

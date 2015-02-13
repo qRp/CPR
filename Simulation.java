@@ -25,6 +25,8 @@ public class Simulation extends JFrame {
 	
 	String name = "";
 	JOptionPane jop = new JOptionPane();
+        JList list4;
+        
 	
 	int x, y, z ;
 	JFormattedTextField saisieX = new JFormattedTextField(new Integer(x));
@@ -148,7 +150,8 @@ public class Simulation extends JFrame {
 		    c4[i]=str;
 		    i++;
 		}
-		JList list4 = new JList(c4);
+		list4 = new JList(c4);
+		
 		JScrollPane scroll3 = new JScrollPane(list4);
 		scroll3.createVerticalScrollBar();
 		this.add(scroll3, gbc);
@@ -220,25 +223,21 @@ public class Simulation extends JFrame {
 		
 	}
 	
-	public boolean getTextEnvX(){
+	public void getTextEnvX(){
 		try {
 			x = new Integer(saisieX.getText()).intValue();
 			y = new Integer(saisieY.getText()).intValue();
 			z = new Integer(saisieZ.getText()).intValue();
-			if (x == 0 || y == 0 || z == 0){
-				jop.showMessageDialog(null, "Vous devez remplir tous les champs !", "Attention", JOptionPane.INFORMATION_MESSAGE);
-				return false;
-			}
-			else{
-				env = Fenetre.environnement(x,y,z);
-				return true;
-			}
-			
+
+			if(x==0){x=1;}
+			if(y==0){y=1;}
+			if(z==0){z=1;}			
+					
 		} 
 	    catch(NullPointerException npe) {
 	        System.out.println("Saisie annulee"); 
 	        this.dispose();
-	        return false;
+	        
 	    }
 	}
 	
@@ -268,19 +267,25 @@ public class Simulation extends JFrame {
 	
 	public void run(){
 		System.out.println("run");
-		/*
-		 * D'abord doit verifier si tous les champs sont remplis
-		 * Puis envoie vers la page Comportements Agents
-		 */
-		//verification des champs de Environnement
-		//boolean envOk = false;
-		//if (!envOk){
-		//	envOk = getTextEnvX();
-	//	}
-		boolean envOk = true; //pour le test
-		if (envOk) {
-			ComportementsAgent cptA = new ComportementsAgent(this.getTitle());
-			cptA.setVisible(true);
+		getTextEnvX();
+		Experience exp = new Experience(name);
+		Environnement environnement = new Environnement(x,y,z);
+		exp.setEnvironnement(environnement);
+		Object[] tab=list4.getSelectedValues();
+		try{
+		    Parser parser = new Parser(System.getProperty("user.dir")+"/Agent.txt");
+		    for(int iii=0; iii<tab.length;iii++){
+			String temp=(String)tab[iii];
+			Agent agent=parser.getAgent(temp);
+			exp.add_agent(agent);
+		    }
 		}
+		catch(IOException e){
+		    int toto=0;
+		    }
+
+		exp.afficher();
+		ComportementsAgent cptA = new ComportementsAgent(this.getTitle(), tab, exp);
+		cptA.setVisible(true);
 	}
 }

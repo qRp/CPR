@@ -199,23 +199,10 @@ public class Fenetre extends JFrame {
 	}
 	
 	public void experience(){
-		Simulation exp = new Simulation(this.getTitle());
- 		exp.setVisible(true);
- 		String name = exp.nameExp();
+		Simulation expG = new Simulation(this.getTitle());
+ 		expG.setVisible(true);
+ 		String name = expG.nameExp();
  		
- 		//Parser parserExp = new Parser(System.getProperty("user.dir")+"/Exp.txt");
- 		//ArrayList<String> Lname = new ArrayList<String>();
- 		//Lname = parserExp.processLineByLine();
- 		
- 		
-	}
-	
-	// Permet de modifier l'environnement
-	public static boolean environnement(int x, int y, int z){
-		System.out.println("x : "+x);
-		System.out.println("y : "+y);
-		System.out.println("z : "+z);
-		return true;
 	}
 	
 	public void visu(){

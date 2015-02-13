@@ -1,23 +1,17 @@
 import java.util.*;
 
 public class Fixation extends Process{
-    private String name;
+    //    private String name;
     private String type;
     private double coefficient;
-    private ArrayList<Agent> agentsCibles = new ArrayList<Agent>();
 
 
-    public Fixation(String nname, String ttype, double ccoeff){
-	super(nname);
+    public Fixation(String nname, Agent aagent, ArrayList<Agent> aagentsCibles, String ttype, double ccoeff){
+	super(nname, aagent, aagentsCibles);
 	type=ttype;
 	coefficient=ccoeff;
     }
-    public Fixation(String nname){
-	super(nname);
-	type="unknow";
-	coefficient=1.0;
-    }
-    public String getname(){
+   public String getname(){
 	return name;
     }
     public String gettype(){
@@ -25,9 +19,6 @@ public class Fixation extends Process{
     }
     public double getcoefficient(){
 	return coefficient;
-    }
-    public ArrayList<Agent> getAgentsCibles(){
-	return agentsCibles;
     }
     public void setname(String nname){
 	name=nname;
@@ -38,12 +29,5 @@ public class Fixation extends Process{
     public void setcoefficient(double ccoef){
 	coefficient=ccoef;
     }
-    public void setAgentsCibles(ArrayList<Agent> aagents){
-	agentsCibles=aagents;
-    }
-    public void add_agentCible(Agent agent){
-	agentsCibles.add(agent);
-    }
-
 
 }

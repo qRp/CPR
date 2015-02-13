@@ -2,10 +2,15 @@ import java.util.*;
 
 
 public class Process{
-    private String name;
-    private Agent agent;
-    private ArrayList<Agent> agentsCibles = new ArrayList<Agent>();
+    protected String name;
+    protected Agent agent;
+    protected ArrayList<Agent> agentsCibles = new ArrayList<Agent>();
 
+    public Process(String nname,Agent aagent, ArrayList<Agent> aagentsCibles){
+	name=nname;
+	agent=aagent;
+	agentsCibles=aagentsCibles;
+    }
     public Process(String nname){
 	name=nname;
     }
