@@ -18,5 +18,10 @@ public class Process{
     public ArrayList<Agent> getAgentsCibles(){
 	return agentsCibles;
     }
-    
+    public void setAgentsCibles(ArrayList<Agent> aagents){
+	agentsCibles=aagents;
+    }
+    public void add_agentCible(Agent agent){
+	agentsCibles.add(agent);
+    }
 }
