@@ -38,7 +38,7 @@ public class Fixation extends Process{
     public void setcoefficient(double ccoef){
 	coefficient=ccoef;
     }
-    public void getAgentsCibles(ArrayList<Agent> aagents){
+    public void setAgentsCibles(ArrayList<Agent> aagents){
 	agentsCibles=aagents;
     }
     public void add_agentCible(Agent agent){

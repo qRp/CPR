@@ -15,5 +15,13 @@ public class Process{
     public void afficher(){
 	System.out.println(name);
     }
-    
+    public ArrayList<Agent> getAgentsCibles(){
+	return agentsCibles;
+    }
+    public void setAgentsCibles(ArrayList<Agent> aagents){
+	agentsCibles=aagents;
+    }
+    public void add_agentCible(Agent agent){
+	agentsCibles.add(agent);
+    }
 }
