@@ -33,4 +33,7 @@ public class Process{
     public void add_agentCible(Agent agent){
 	agentsCibles.add(agent);
     }
+    public Agent getAgent(){
+    	return agent;
+    }
 }

@@ -7,6 +7,8 @@ public class Experience{
     private ArrayList<Agent> lagent = new ArrayList<Agent>();
     private Environnement environnement;
 
+    public Experience(){}
+
     public Experience(String nname){
 	name=nname;
     }

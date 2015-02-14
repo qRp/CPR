@@ -121,7 +121,7 @@ public class ComportementsAgent extends JFrame{
 		b.setEnabled(true);
 		b.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-			    run(experience); 
+			    run(exp); 
 		 	}
 		 });
 		this.add(b,gbc);
@@ -203,8 +203,14 @@ public class ComportementsAgent extends JFrame{
 	}
     }
 
+
 	public void run(Experience exp){
-	    
+        Environnement test = exp.getenvironnement();
+        System.out.println("test emi "+test);
+	    SaveNetlogo snl = new SaveNetlogo(exp);
+	    String nameFile = snl.writeFile();
+	    RunNetlogo runNL = new RunNetlogo(nameFile);
+	    runNL.run();
 	    //TODO Connecter la partie netLogo avec exp
 	}
 

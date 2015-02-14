@@ -35,6 +35,8 @@ public class MainQ {
 	Environnement env = new Environnement(20,20,20,"testEnvironnement");
 	exp.setEnvironnement(env);
 	SaveNetlogo sn = new SaveNetlogo(exp);
-	sn.writeFile();
+    String nameFile = sn.writeFile();
+    RunNetlogo runNL = new RunNetlogo(nameFile);
+    runNL.run();
     }
 }
