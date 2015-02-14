@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+
 import javax.swing.*;
+
 import java.io.*;
 
 
@@ -31,8 +33,8 @@ public class ComportementsAgent extends JFrame{
     JList listAg2;
     JComboBox listFix;
 
-   Experience experience = new Experience();
-
+    Experience experience;
+   
     public ComportementsAgent(String titre, Object[] tableau, Experience exp1){
 		super(titre);
 		//this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -44,7 +46,12 @@ public class ComportementsAgent extends JFrame{
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		this.setLayout(gbl);
-
+		
+		Simulation expag = new Simulation(titre);
+ 		expag.setVisible(true);
+ 		String nomexp = expag.nameExp();
+ 		experience = new Experience(nomexp);
+		
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.CENTER;
 		this.add(new JLabel(" "), gbc);
@@ -192,6 +199,7 @@ public class ComportementsAgent extends JFrame{
 	}
 	catch(IOException e){
 	    System.out.println("FATAL ERROR SYSTEM - ComportementsAgent.java");
+	    return null;
 	}
     }
 
