@@ -8,6 +8,10 @@ public class Agent {
     public Agent(String nname){
 	name=nname;
     }
+    public Agent(String nname, Caracteristique ttype){
+	name=nname;
+	type=ttype;
+    }
     public void setCaracteristique(Caracteristique ncarac){
 	type=ncarac;
     }
