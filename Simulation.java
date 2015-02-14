@@ -24,8 +24,7 @@ public class Simulation extends JFrame {
 	JButton b3 = new JButton();
 	
 	String name = "";
-	JOptionPane jop = new JOptionPane();
-    JList list4;
+	JList list4;
         
 	
 	int x, y, z ;
@@ -228,14 +227,12 @@ public class Simulation extends JFrame {
         try { 
            do {
         	   name = JOptionPane.showInputDialog(null, "Saisir le nom de l'experience\nCaracteres autorises alphanumeriques"); 
-        	   //Si on annule c'est la ligne suivante qui provoque la levee de NullPointerException 
-        	   if (name.equals(null)) {} // on ne fait rien
+        	   if (name.equals(null)) {}
         	   if (name.matches("([0-9a-zA-Z-])+") == false) {}
-        	   //System.out.println("Fin de saisie sans rien frapper au clavier");
         	   } while (name.equals("") || name.matches("([0-9a-zA-Z-])+") == false);
            return name;
            } 
-        catch(NullPointerException npe) // cas <annuler> : uneEntree.equals(null) 
+        catch(NullPointerException npe)
         {
         	System.out.println("Saisie annulee par le clic du bouton <Annuler>"); 
         	this.dispose();
@@ -249,7 +246,6 @@ public class Simulation extends JFrame {
 	}
 	
 	public void run(){
-		System.out.println("run");
 		getTextEnv();
 		Experience exp = new Experience(name);
 		Environnement environnement = new Environnement(x,y,z);

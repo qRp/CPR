@@ -137,7 +137,6 @@ public class AgentGraphique extends JFrame {
 		b2.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
 		 	    agentEstCree();
-		 		System.out.println("ok agent cree");
 		 	}
 		 });
 		this.add(b2, gbc);
@@ -251,6 +250,7 @@ public class AgentGraphique extends JFrame {
 		b1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
 			    paramEstCree();
+			    
 		 	}
 		 });
 		this.add(b1, gbc);
@@ -267,7 +267,8 @@ public class AgentGraphique extends JFrame {
 	    de = new Descripteur (par, type, val, min, max, inc);
 	    de.ecrire();
 	    }
-	    
+	  
+	
     public void agentEstCree(){
 	Object[] tabpara = listparam.getSelectedValues();
 	Caracteristique bioagent = new BioAgent("bioagent");
@@ -282,17 +283,14 @@ public class AgentGraphique extends JFrame {
 	    }
 	}
 	catch(IOException e){
-	    System.out.println("FATAL ERROR SYSTEM - Simulation.java");;
+	    System.out.println("FATAL ERROR SYSTEM - AgentGraphique.java");;
 	}
 	
-        nom = saisieNom.getText();
+    nom = saisieNom.getText();
 	desc = saisieDesc.getText();
 	Agent agent=new Agent(nom,bioagent);
-	System.out.println("Nom de l'agent : "+ nom +"\nDescription de l'agent : "+ desc);
 	String nomPara = de.getname();
 	String typePara = de.gettype();
-	System.out.println("Nom du param : "+ nomPara +"\nType du param : "+ typePara);
-	//de.getvalues(); //arrayList
 	    
     }
     
