@@ -31,7 +31,7 @@ public class ComportementsAgent extends JFrame{
     JList listAg2;
     JComboBox listFix;
 
-   
+   Experience experience = new Experience();
 
     public ComportementsAgent(String titre, Object[] tableau, Experience exp1){
 		super(titre);
@@ -101,9 +101,7 @@ public class ComportementsAgent extends JFrame{
 		final Experience exp = exp1;		
 		b1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-			    System.out.println("bonbon");
-			    valide_comp(exp);
-		 		System.out.println("valider les comportements");
+			    experience = valide_comp(exp);
 		 	}
 		 });
 		this.add(b1, gbc);
@@ -116,7 +114,7 @@ public class ComportementsAgent extends JFrame{
 		b.setEnabled(true);
 		b.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-			    System.out.println("bouton run");
+			    run(experience); 
 		 	}
 		 });
 		this.add(b,gbc);
@@ -168,7 +166,8 @@ public class ComportementsAgent extends JFrame{
 	   panel1.add(saisieCoeff, BorderLayout.CENTER);
    }
     
-    public void valide_comp(Experience exp){
+    
+    public Experience valide_comp(Experience exp){
 	Object[] tableau1=listAg.getSelectedValues();
 	Object[] tableau2=listAg2.getSelectedValues();
 	Agent agenttemp;
@@ -189,14 +188,17 @@ public class ComportementsAgent extends JFrame{
 	    System.out.println(coeff);
 	    Process process = new Fixation("fixation",agent,lagent,type,coeff);
 	    exp.add_process(process);
-	    exp.afficher();
+	    return exp;
 	}
 	catch(IOException e){
 	    System.out.println("FATAL ERROR SYSTEM - ComportementsAgent.java");
 	}
     }
 
-	
+	public void run(Experience exp){
+	    
+	    //TODO Connecter la partie netLogo avec exp
+	}
 
 
 }
