@@ -10,6 +10,9 @@ public class Descripteur{
     private float pasV; //sous le pasV, la plage
     private ArrayList<Float> lValue = new ArrayList<Float>();
 
+    public Descripteur(String nname){
+	name=nname;
+    }
     public Descripteur(String nname, String ntype, float nvalue){
 	    name = nname;
 	    type = ntype;
@@ -76,10 +79,17 @@ public class Descripteur{
         lValue.add(pasV);
 	    return lValue;
     }
-    
+    public void afficher(){
+	System.out.println(getname());
+	System.out.println(gettype());
+	System.out.println(getvalue());
+	System.out.println(getminV());
+	System.out.println(getmaxV());
+	System.out.println(getpasV());
+    }
     public void ecrire(){
 	//on va chercher le chemin et le nom du fichier et on me tout ca dans un String
-	String adressedufichier = System.getProperty("user.dir") + "/Exp.txt";
+	String adressedufichier = System.getProperty("user.dir") + "/Descripteur.txt";
 	try{
 		/**
 		 * BufferedWriter a besoin d un FileWriter, 
@@ -94,10 +104,14 @@ public class Descripteur{
 		//on marque dans le fichier ou plutot dans le BufferedWriter qui sert comme un tampon(stream)
 		output.write("name:"+getname()+"\n");
 		output.write("type:"+gettype()+"\n");
-		output.write("value:"+(String)getvalue()+"\n");
-		output.write("minV:"+(String)getminV()+"\n");
-		output.write("maxV:"+(String)getmaxV()+"\n");
-		output.write("pasV:"+(String)getpasV()+"\n");		
+		String temp=Float.toString(getvalue());
+		output.write("value:"+temp+"\n");
+		temp=Float.toString(getminV());
+		output.write("minV:"+temp+"\n");
+		temp=Float.toString(getmaxV());
+		output.write("maxV:"+temp+"\n");
+		temp=Float.toString(getpasV());
+		output.write("pasV:"+temp+"\n");		
 
 		//on peut utiliser plusieurs fois methode write
 		
