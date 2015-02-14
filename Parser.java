@@ -80,32 +80,30 @@ public class Parser {
 	float maxV;
 	float pasV;
 	while(scanner.hasNextLine()){
-	    name_descripteur=processLine(scanner.nextLine());
+	    name_descripteur=processLine2(scanner.nextLine());
 	    if (name_descripteur.equals(name_to_find)){
 		descripteur.setname(name_descripteur);
 		System.out.println(name_descripteur);
 		for(int i=0; i<5;i++){
 		    String line=scanner.nextLine();
 		    if(i==0){
-			System.out.println(processLine(line));
 			type=processLine(line);
 			descripteur.settype(type);
-			System.out.println(type);
 		    }
 		    if(i==1){
-			value=Float.parseFloat(processLine(line));
+			value=Float.parseFloat(processLine2(line));
 			descripteur.setvalue(value);
 		    }
 		    if(i==2){
-			minV=Float.parseFloat(processLine(line));
+			minV=Float.parseFloat(processLine2(line));
 			descripteur.setminV(minV);
 		    }
 		    if(i==3){
-			maxV=Float.parseFloat(processLine(line));
+			maxV=Float.parseFloat(processLine2(line));
 			descripteur.setmaxV(maxV);
 		    }
 		    if(i==4){
-			pasV=Float.parseFloat(processLine(line));
+			pasV=Float.parseFloat(processLine2(line));
 			descripteur.setpasV(pasV);
 		    }	    
 		}
@@ -138,7 +136,7 @@ public class Parser {
 	}
 	return Lname;
     }
-
+    
     public ArrayList<String> getListExp() throws IOException{
 	ArrayList<String> Lname = new ArrayList<String>();
 	Scanner scanner = new Scanner(filePath, ENCODING.name());
@@ -152,13 +150,40 @@ public class Parser {
 	return Lname;
     }
     
-    protected String processLine(String aLine){
+    public ArrayList<String> getListDescripteur() throws IOException{
+	ArrayList<String> Lnamedescripteur = new ArrayList<String>();
+	Scanner scanner = new Scanner(filePath, ENCODING.name());
+	String name_descripteur="";
+	while(scanner.hasNextLine()){		
+	    name_descripteur=processLine(scanner.nextLine());
+	    if(!name_descripteur.equals("")){
+		    Lnamedescripteur.add(name_descripteur);
+	    }
+	}
+	return Lnamedescripteur;
+    }
+    
+    protected String processLine2(String aLine){
 	Scanner scanner = new Scanner(aLine);
 	scanner.useDelimiter(":");
 	if (scanner.hasNext()){
 	    String name = scanner.next();
 	    String value = scanner.next();
 	    return value;
+	}
+	return "";
+    }
+    protected String processLine(String aLine){
+	Scanner scanner = new Scanner(aLine);
+	scanner.useDelimiter(":");
+	if (scanner.hasNext()){
+	    String name = scanner.next();
+	    String value = scanner.next();
+	    //log("Name is : " + quote(name.trim()) + ", and Value is : " + quote(value.trim()));
+	    if(name.equals("name")){
+		//	  System.out.println("i'm here");
+		return value;
+	    }
 	}
 	return "";
     }

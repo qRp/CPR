@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+import java.io.*;
 
 import javax.swing.*;
 
@@ -46,7 +48,7 @@ public class AgentGraphique extends JFrame {
 	JList listparam;
 	Descripteur de;
 	
-	public AgentGraphique(String titre) { //+  Descripteur tabdescrip
+    public AgentGraphique(String titre) {
 		super(titre);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -153,15 +155,20 @@ public class AgentGraphique extends JFrame {
 		gbc.gridx = 2;
 		gbc.gridy = 3;
 		gbc.gridwidth = 6;
-		String param[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"};
-		
-		/*
-	    String param [] = new String[tabdescrip.length];
-	    for(int ii=0; ii<tabdescrip.length;ii++){
-            String tempAgent =(String)tabdescrip[ii];
-		    param[ii] = tempAgent;
-	    }
-		*/
+		ArrayList<String> Ldescripteur = new ArrayList<String>();
+		Parser parserDescripteur = new Parser(System.getProperty("user.dir")+"/Descripteur.txt");
+		try{
+		    Ldescripteur = parserDescripteur.getListDescripteur();
+		}
+		catch(IOException e){
+			System.out.println("FATAL ERROR SYSTEM - AgentGraphique.java");
+		}
+		String param [] = new String[Ldescripteur.size()];
+		int i=0;
+		for(String str : Ldescripteur){
+		    param[i]=str;
+		    i++;
+		}	
 		
 		listparam = new JList(param);
 		JScrollPane scroll = new JScrollPane(listparam);
@@ -243,8 +250,7 @@ public class AgentGraphique extends JFrame {
 		b1.setEnabled(true);
 		b1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-		 	    paramEstCree();
-		 		System.out.println("ok page rechargee");
+			    paramEstCree();
 		 	}
 		 });
 		this.add(b1, gbc);
@@ -258,20 +264,35 @@ public class AgentGraphique extends JFrame {
 	    min = new Float(saisieMin.getText()).floatValue();
 	    max = new Float(saisieMax.getText()).floatValue();
 	    inc = new Float(saisieInc.getText()).floatValue();
-	    System.out.println(par+","+type+","+val+","+min +","+max+","+inc);
 	    de = new Descripteur (par, type, val, min, max, inc);
-	    Object[] tabpara = listparam.getSelectedValues();
-
+	    de.ecrire();
 	    }
 	    
     public void agentEstCree(){
+	Object[] tabpara = listparam.getSelectedValues();
+	Caracteristique bioagent = new BioAgent("bioagent");
+	ArrayList<Descripteur> ldes=new ArrayList<Descripteur>();
+	try{
+	    Parser parser = new Parser(System.getProperty("user.dir")+"/Descripteur.txt");
+	    for(int iii=0; iii<tabpara.length;iii++){
+		String temp=(String)tabpara[iii];
+		Descripteur descripteur=parser.getDescripteur(temp);
+		bioagent.ajouter(descripteur);
+		
+	    }
+	}
+	catch(IOException e){
+	    System.out.println("FATAL ERROR SYSTEM - Simulation.java");;
+	}
+	
         nom = saisieNom.getText();
-	    desc = saisieDesc.getText();
-	    System.out.println("Nom de l'agent : "+ nom +"\nDescription de l'agent : "+ desc);
-	    String nomPara = de.getname();
-	    String typePara = de.gettype();
-	    System.out.println("Nom du param : "+ nomPara +"\nType du param : "+ typePara);
-	    //de.getvalues(); //arrayList
+	desc = saisieDesc.getText();
+	Agent agent=new Agent(nom,bioagent);
+	System.out.println("Nom de l'agent : "+ nom +"\nDescription de l'agent : "+ desc);
+	String nomPara = de.getname();
+	String typePara = de.gettype();
+	System.out.println("Nom du param : "+ nomPara +"\nType du param : "+ typePara);
+	//de.getvalues(); //arrayList
 	    
     }
     

@@ -190,7 +190,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	public void molecule(){
-		AgentGraphique ag = new AgentGraphique(this.getTitle());
+	    AgentGraphique ag = new AgentGraphique(this.getTitle());
 		ag.setVisible(true);
 	}
 	
