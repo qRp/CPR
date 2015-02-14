@@ -31,19 +31,25 @@ public class AgentGraphique extends JFrame {
 	JButton b2 = new JButton();
 	JButton b1 = new JButton();
 	
-	JFormattedTextField saisieNom = new JFormattedTextField();
-	JFormattedTextField saisieDesc = new JFormattedTextField();
-	JFormattedTextField saisieParam = new JFormattedTextField();
-	JFormattedTextField saisieType = new JFormattedTextField();
-	JFormattedTextField saisieVal = new JFormattedTextField();
-	JFormattedTextField saisieMin = new JFormattedTextField();
-	JFormattedTextField saisieMax = new JFormattedTextField();
-	JFormattedTextField saisieInc = new JFormattedTextField();
+	String nom, desc, par, type;
+	float val, min, max, inc;
 	
-	public AgentGraphique(String titre) {
+	JFormattedTextField saisieNom = new JFormattedTextField(nom);
+	JFormattedTextField saisieDesc = new JFormattedTextField(desc);
+	JFormattedTextField saisieParam = new JFormattedTextField(par);
+	JFormattedTextField saisieType = new JFormattedTextField(type);
+	JFormattedTextField saisieVal = new JFormattedTextField(new Float(val));
+	JFormattedTextField saisieMin = new JFormattedTextField(new Float(min));
+	JFormattedTextField saisieMax = new JFormattedTextField(new Float(max));
+	JFormattedTextField saisieInc = new JFormattedTextField(new Float(inc));
+	
+	JList listparam;
+	Descripteur de;
+	
+	public AgentGraphique(String titre) { //+  Descripteur tabdescrip
 		super(titre);
-		//this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 		this.setBackground(Color.white);
 		this.setLocationRelativeTo(this);
@@ -128,6 +134,7 @@ public class AgentGraphique extends JFrame {
 		b2.setEnabled(true);
 		b2.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
+		 	    agentEstCree();
 		 		System.out.println("ok agent cree");
 		 	}
 		 });
@@ -147,7 +154,16 @@ public class AgentGraphique extends JFrame {
 		gbc.gridy = 3;
 		gbc.gridwidth = 6;
 		String param[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"};
-		JList listparam = new JList(param);
+		
+		/*
+	    String param [] = new String[tabdescrip.length];
+	    for(int ii=0; ii<tabdescrip.length;ii++){
+            String tempAgent =(String)tabdescrip[ii];
+		    param[ii] = tempAgent;
+	    }
+		*/
+		
+		listparam = new JList(param);
 		JScrollPane scroll = new JScrollPane(listparam);
 		scroll.createVerticalScrollBar();
 		this.add(scroll, gbc);
@@ -157,8 +173,6 @@ public class AgentGraphique extends JFrame {
 		lab4.setText("Nom");
 		lab4.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		lab4.setForeground(new Color(48, 48, 48));
-		//lab4.setPreferredSize(new Dimension(300, 100));
-		//lab4.setHorizontalAlignment(0);
 		this.add(lab4, gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 5;
@@ -170,8 +184,6 @@ public class AgentGraphique extends JFrame {
 		lab5.setText("Type");
 		lab5.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		lab5.setForeground(new Color(48, 48, 48));
-		//lab5.setPreferredSize(new Dimension(300, 100));
-		//lab5.setHorizontalAlignment(0);
 		this.add(lab5, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 5;
@@ -183,8 +195,6 @@ public class AgentGraphique extends JFrame {
 		lab6.setText("Valeur");
 		lab6.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		lab6.setForeground(new Color(48, 48, 48));
-		//lab6.setPreferredSize(new Dimension(300, 100));
-		//lab6.setHorizontalAlignment(0);
 		this.add(lab6, gbc);
 		gbc.gridx = 3;
 		gbc.gridy = 5;
@@ -196,8 +206,6 @@ public class AgentGraphique extends JFrame {
 		lab7.setText("Minimum");
 		lab7.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		lab7.setForeground(new Color(48, 48, 48));
-		//lab7.setPreferredSize(new Dimension(300, 100));
-		//lab7.setHorizontalAlignment(0);
 		this.add(lab7, gbc);
 		gbc.gridx = 4;
 		gbc.gridy = 5;
@@ -209,8 +217,6 @@ public class AgentGraphique extends JFrame {
 		lab8.setText("Maximum");
 		lab8.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		lab8.setForeground(new Color(48, 48, 48));
-		//lab8.setPreferredSize(new Dimension(300, 100));
-		//lab8.setHorizontalAlignment(0);
 		this.add(lab8, gbc);
 		gbc.gridx = 5;
 		gbc.gridy = 5;
@@ -219,11 +225,9 @@ public class AgentGraphique extends JFrame {
 		this.add(panMax, gbc);
 		gbc.gridx = 6;
 		gbc.gridy = 4;
-		lab9.setText("Maximum");
+		lab9.setText("Incrementation");
 		lab9.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		lab9.setForeground(new Color(48, 48, 48));
-		//lab9.setPreferredSize(new Dimension(300, 100));
-		//lab9.setHorizontalAlignment(0);
 		this.add(lab9, gbc);
 		gbc.gridx = 6;
 		gbc.gridy = 5;
@@ -239,6 +243,7 @@ public class AgentGraphique extends JFrame {
 		b1.setEnabled(true);
 		b1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
+		 	    paramEstCree();
 		 		System.out.println("ok page rechargee");
 		 	}
 		 });
@@ -246,4 +251,30 @@ public class AgentGraphique extends JFrame {
 		
 		pack();
 	}
+	public void paramEstCree(){
+	    par = saisieParam.getText();
+	    type = saisieType.getText();
+	    val = new Float(saisieVal.getText()).floatValue();
+	    min = new Float(saisieMin.getText()).floatValue();
+	    max = new Float(saisieMax.getText()).floatValue();
+	    inc = new Float(saisieInc.getText()).floatValue();
+	    System.out.println(par+","+type+","+val+","+min +","+max+","+inc);
+	    de = new Descripteur (par, type, val, min, max, inc);
+	    Object[] tabpara = listparam.getSelectedValues();
+
+	    }
+	    
+    public void agentEstCree(){
+        nom = saisieNom.getText();
+	    desc = saisieDesc.getText();
+	    System.out.println("Nom de l'agent : "+ nom +"\nDescription de l'agent : "+ desc);
+	    String nomPara = de.getname();
+	    String typePara = de.gettype();
+	    System.out.println("Nom du param : "+ nomPara +"\nType du param : "+ typePara);
+	    //de.getvalues(); //arrayList
+	    
+    }
+    
+   
+	    
 }

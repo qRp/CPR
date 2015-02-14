@@ -26,6 +26,11 @@ public class MainQ {
 	Parser parserAg = new Parser(System.getProperty("user.dir") + "/Agent.txt");
 	//Agent test=parserAg.getAgent("tatait");
 	//test.afficher();
+	Descripteur descripteur = new Descripteur("test_descripteur","String",1,0,100,1);
+	descripteur.ecrire();
+	Parser parserDescripteur = new Parser(System.getProperty("user.dir")+"/Descripteur.txt");
+	Descripteur testdescripteur = parserDescripteur.getDescripteur("test_descripteur");
+	testdescripteur.afficher();
 	
 	Environnement env = new Environnement(20,20,20,"testEnvironnement");
 	exp.setEnvironnement(env);
