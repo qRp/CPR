@@ -19,6 +19,10 @@ public class Process{
     }
     public void afficher(){
 	System.out.println(name);
+	agent.afficher();
+	for(Agent aagent : agentsCibles){
+	    aagent.afficher();
+	    }
     }
     public ArrayList<Agent> getAgentsCibles(){
 	return agentsCibles;

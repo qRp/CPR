@@ -101,7 +101,8 @@ public class ComportementsAgent extends JFrame{
 		final Experience exp = exp1;		
 		b1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) { 
-			    //valide_comp(exp);
+			    System.out.println("bonbon");
+			    valide_comp(exp);
 		 		System.out.println("valider les comportements");
 		 	}
 		 });
@@ -144,11 +145,13 @@ public class ComportementsAgent extends JFrame{
 	   lab2.setForeground(new Color(136, 66, 29));
 	   lab2.setHorizontalAlignment(0);
 	   panel1.add(lab2, BorderLayout.WEST);
+	   
 	   String tabtemp []= new String[tabOnglet.length];
 	   for(int ii=0; ii<tabOnglet.length;ii++){
 			String temp=(String)tabOnglet[ii];
 			tabtemp[ii]=temp;
 	   }
+	   
 	   listAg2 = new JList(tabtemp);
 	   JScrollPane scroll2 = new JScrollPane(listAg2);
 	   scroll2.createVerticalScrollBar();
@@ -162,13 +165,14 @@ public class ComportementsAgent extends JFrame{
 	   labCoeff.setHorizontalAlignment(0);
 	   panel1.add(labCoeff, BorderLayout.SOUTH);
 	   //saisieCoeff.setPreferredSize(new Dimension(60, 20));
-	   panel1.add(saisieCoeff, BorderLayout.SOUTH);
+	   panel1.add(saisieCoeff, BorderLayout.CENTER);
    }
     
     public void valide_comp(Experience exp){
 	Object[] tableau1=listAg.getSelectedValues();
 	Object[] tableau2=listAg2.getSelectedValues();
 	Agent agenttemp;
+	System.out.println("valide comp");
 	try{
 	    Parser parser = new Parser(System.getProperty("user.dir")+"/Agent.txt");
 	    String temp = (String) tableau1[0];
