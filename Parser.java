@@ -70,6 +70,50 @@ public class Parser {
 	}
 	return agent;
     }
+    public Descripteur getDescripteur(String name_to_find) throws IOException{
+	Descripteur descripteur = new Descripteur(name_to_find);
+	Scanner scanner = new Scanner(filePath, ENCODING.name());
+	String name_descripteur="";
+	String type="";
+	float value;
+	float minV;
+	float maxV;
+	float pasV;
+	while(scanner.hasNextLine()){
+	    name_descripteur=processLine(scanner.nextLine());
+	    if (name_descripteur.equals(name_to_find)){
+		descripteur.setname(name_descripteur);
+		System.out.println(name_descripteur);
+		for(int i=0; i<5;i++){
+		    String line=scanner.nextLine();
+		    if(i==0){
+			System.out.println(processLine(line));
+			type=processLine(line);
+			descripteur.settype(type);
+			System.out.println(type);
+		    }
+		    if(i==1){
+			value=Float.parseFloat(processLine(line));
+			descripteur.setvalue(value);
+		    }
+		    if(i==2){
+			minV=Float.parseFloat(processLine(line));
+			descripteur.setminV(minV);
+		    }
+		    if(i==3){
+			maxV=Float.parseFloat(processLine(line));
+			descripteur.setmaxV(maxV);
+		    }
+		    if(i==4){
+			pasV=Float.parseFloat(processLine(line));
+			descripteur.setpasV(pasV);
+		    }	    
+		}
+		return descripteur;
+	    }
+	}
+	return descripteur;
+    }
 
     public String getname(String line){
 	Scanner scanner = new Scanner(line);
@@ -114,11 +158,7 @@ public class Parser {
 	if (scanner.hasNext()){
 	    String name = scanner.next();
 	    String value = scanner.next();
-	    //log("Name is : " + quote(name.trim()) + ", and Value is : " + quote(value.trim()));
-	    if(name.equals("name")){
-		//	  System.out.println("i'm here");
-		return value;
-	    }
+	    return value;
 	}
 	return "";
     }
