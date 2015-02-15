@@ -26,6 +26,7 @@ public class Fenetre extends JFrame {
 	JButton b4 = new JButton();
 	
 	JList list1;
+	
 
 	/** Constructeur.
 	 * 
@@ -318,5 +319,4 @@ public class Fenetre extends JFrame {
 	public void charger() {
 		JOptionPane.showMessageDialog(this,"Charger\n");
 	}
-
 }

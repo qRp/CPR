@@ -33,10 +33,14 @@ public class MainQ {
 	testdescripteur.afficher();
 	
 	Environnement env = new Environnement(20,20,20,"testEnvironnement");
+	Process pro = new Process("test");
+	pro.setAgent(ag);
+	exp.add_process(pro);
 	exp.setEnvironnement(env);
 	SaveNetlogo sn = new SaveNetlogo(exp);
     String nameFile = sn.writeFile();
-    RunNetlogo runNL = new RunNetlogo(nameFile);
-    runNL.run();
+    
+    //RunNetlogo runNL = new RunNetlogo();
+    //runNL.run(nameFile);
     }
 }

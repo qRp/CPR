@@ -9,6 +9,7 @@ import javax.swing.text.MaskFormatter;
 
 
 public class Simulation extends JFrame {
+    
 	JLabel label = new JLabel("");
 	JLabel labtitre = new JLabel("");
 	

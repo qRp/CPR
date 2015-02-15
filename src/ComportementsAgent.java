@@ -205,13 +205,21 @@ public class ComportementsAgent extends JFrame{
 
 
 	public void run(Experience exp){
-        Environnement test = exp.getenvironnement();
-        System.out.println("test emi "+test);
+        System.out.println("test COUCOU "+exp);
 	    SaveNetlogo snl = new SaveNetlogo(exp);
+        System.out.println("test emi "+snl);
 	    String nameFile = snl.writeFile();
+	    System.out.println("test nameFile NL "+ nameFile);
+	    try{
+	        Runtime rtime = Runtime.getRuntime();
+	        rtime.exec(new String[]{"./runNL.sh",nameFile});
+	    }
+	    catch (IOException e){e.printStackTrace();}
+	    /*
 	    RunNetlogo runNL = new RunNetlogo(nameFile);
+	    String[] argv = new String[0];
 	    runNL.run();
-	    //TODO Connecter la partie netLogo avec exp
+	    */
 	}
 
 

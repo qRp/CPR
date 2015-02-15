@@ -36,4 +36,7 @@ public class Process{
     public Agent getAgent(){
     	return agent;
     }
+    public void setAgent(Agent aagent){
+    	agent = aagent;
+    }
 }

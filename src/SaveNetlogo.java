@@ -22,6 +22,7 @@ public class SaveNetlogo{
     private Environnement env;
 
     public SaveNetlogo(Experience expe){
+        System.out.println("coucou");
 	    exp = expe;
     }    
     
@@ -119,8 +120,8 @@ public class SaveNetlogo{
 		try{
 			env = exp.getenvironnement();
             System.out.println("test emi "+env);
-			name = exp.getname();
-			name = "./../nlogo/"+name+".nlogo";
+			String nameFile = exp.getname();
+			name = "./../nlogo/"+nameFile+".nlogo";
 			BufferedWriter buff=new BufferedWriter(new FileWriter(name));
             
             //create main code
@@ -196,7 +197,7 @@ public class SaveNetlogo{
             writeFileNL(buff, "./nlogo-file/endFileNetlogo.nlogo");
 			buff.flush(); 
 			buff.close();
-			return name;
+			return nameFile+".nlogo";
 		}
 		catch(Exception e){
 		    System.out.println("FATAL ERROR SYSTEM - SaveNetlogo.java/writeFile()");
@@ -280,6 +281,8 @@ public class SaveNetlogo{
 	private void createCode(BufferedWriter buff, Experience exp){
 	    try{
 	        lprocess = exp.getlprocess();
+	        System.out.println("test kbfdsbfdbkfdbkh sfd "+lprocess.size());
+	        
 	        buff.write("to go\n");
 	        for (int j=0 ; j<lprocess.size() ; j++){
                 Process p = lprocess.get(j);
@@ -309,11 +312,11 @@ public class SaveNetlogo{
 	                buff.write("\tset happy? true ]\n");
 	                buff.write("\t[ set happy? false ]\n");
 	                buff.write("\tfd speed\n");
-	                buff.write("\t]]");
+	                buff.write("\t]\n");
 	            }
 	        }
 	        buff.write("\ttick\n");
-	        buff.write("end");
+	        buff.write("end\n");
 	        buff.newLine();
 	        writeFileNL(buff, "./nlogo-file/fixation.nlogo");
         }

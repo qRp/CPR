@@ -3,21 +3,20 @@ import java.awt.EventQueue;
 
 
 public class RunNetlogo {
-    private String nameFile;
     
-    public RunNetlogo(String nname){
-        nameFile=nname;
-    } 
-    
-    public void run() {
-        //App.main(argv);
+    public static void main(String[] argv) {
+        final String nameFile = argv[0];
+        String[] arg = new String[0];
         System.out.println(nameFile);
+        App.main(arg);
         try {
             EventQueue.invokeAndWait
                 ( new Runnable()
                     { public void run() {
                         try {
-                          App.app().open(nameFile);
+                          //App.app().open(nameFile);
+                          App.app().open("./../nlogo/"
+                          +nameFile);
                         }
                         catch( java.io.IOException ex ) {
                           ex.printStackTrace();
